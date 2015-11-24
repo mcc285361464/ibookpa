@@ -35,6 +35,9 @@ ul,ol {
 .pointer {
 	cursor: pointer;
 }
+.none {
+	display: none;
+}
 .body-content .header{
 	position:relative;
 	height:80px;

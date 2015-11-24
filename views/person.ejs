@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>书趴网</title>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/base/jquery.ui.all.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/person.css">
+</head>
+<body>
+	<div class="body-content">
+            
+        <% include header.ejs%>
+
+		<div class="height80"></div>
+		<img src="/images/img1.jpg" class="user-pic">
+
+		<div class="main-content">
+			<ul class="ul-tags">
+                <li class="tag-title">个人中心</li>
+                <li class="tag-active" id="tag-base-info">基本信息<span class="glyphicon glyphicon-circle-arrow-right tag-sign"></span></li>
+                <li id="tag-message-info">消息中心<span class="tag-sign"></span></li>
+                <li id="tag-friend-manage">好友管理<span class="tag-sign"></span></li>
+                <li id="tag-self-activity">我的活动<span class="tag-sign"></span></li>
+                <li id="tag-change-password">修改密码<span class="tag-sign"></span></li>
+            </ul>
+            <div class="right-block">
+                <div class="title"> 
+                <!--
+                    基本信息
+                -->
+                <!--
+                    消息中心
+                -->
+                <!--
+                    好友管理
+                -->
+                <!--
+                    我的活动
+                -->
+                修改密码
+                </div>
+                <div class="info">
+                    <!-- 基本信息-->
+                    <div class="basic-info info-act">
+                        <ul class="ul-user-info">
+                            <li><span class="red fontS20">*</span><label>昵称</label><input name="nickname" type="text" class="inputBase"></li>
+                            <li><span class="red fontS20">*</span><label>性别</label><input type="radio" name="sex" class="inputRadio"><span class="fontS18">男</span><input type="radio" name="sex" class="inputRadio"><span class="fontS18">女</span></li>
+                            <li><span class="red fontS20">*</span><label>生日</label><input name="birth" id="birth" type="text" class="inputBase"></li>
+                            <li><span class="red fontS20">*</span><label>邮箱</label><input name="email" type="text" class="inputBase"></li>
+                            <li><span class="red fontS20">*</span><label>学校</label><input name="school" type="text" class="inputBase"></li>
+                            <li class="marginL10"><label>签名</label><input name="signature" type="text" class="inputBase"></li>
+                            <div class="btn btn-default btn-save">保存</div>
+                        </ul>
+                    </div>
+                    <!-- base info end-->
+                    <!-- 消息中心-->
+                    <div class="message-info  info-act">
+                        <div class="message-item">
+                            <div class="message-from">
+                                <span>皮蛋</span>给你的评论
+                                <span>(2015-11-22 11:11)</span>
+                            </div>
+                            <div class="message-content">
+                                啊啊啊啊啊皮蛋我爱你，你的外观最美艳。
+                            </div>
+                        </div>
+                    </div>
+                    <!-- message end -->
+                    <!-- 好友管理-->
+                    <div class="friend-manage  info-act">
+                        <div class="friend-item">
+                            <img src="/images/img1.jpg">
+                            <span>火腿蛋</span>
+                            <span>哈尔滨蛋蛋学院</span>
+                            <span>female</span>
+                            <span class="btn btn-danger">删除好友</span>
+                        </div>
+                    </div>
+                    <!-- friend manage end-->
+                    <!-- 我的活动-->
+                    <div class="my-activities fontS18 info-act">
+                        <ul class="ul-activity">
+                            <li class="li-active" id="li-self">我发起的</li>
+                            <li class="" id="li-join">我参与的</li>
+                            <li class="" id="li-end">已结束的</li>
+                        </ul>
+                        <div class="self-activity activity">
+                            <div class="activity-item">
+                                <img src="/images/img1.jpg" class="user-head">
+                                <span class="title">皮蛋之旅</span>
+                            </div>
+                        </div>
+
+                        <div class="join-activity activity">
+                            <div class="activity-item">
+                                <img src="/images/img1.jpg" class="user-head">
+                                <span class="title">鸭蛋之旅</span>
+                            </div>
+                        </div>
+                        <div class="end-activity activity">
+                             <div class="activity-item">
+                                <img src="/images/img1.jpg" class="user-head">
+                                <span class="title">鹅蛋之旅</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 修改密码-->
+                    <div class="change-password  info-act">
+                        <ul class="ul-change-password fontS18">
+                            <li><label>原密码</label><input name="oldPassword" type="text" class="inputBase"></li>
+                            <li><label>新密码</label><input name="oldPassword" type="password" class="inputBase new-password"><span class="glyphicon glyphicon-eye-close marginL10 pointer see-password"></span></li>
+                        </ul>
+                        <div class="btn btn-default btn-pass-submit">确认修改</div>
+                    </div>
+                    <!-- change password end-->
+                </div>
+            </div>
+            <div class="clear-both"></div>
+		</div>
+        
+        <% include footer.ejs%>
+
+	</div>
+<script type="text/javascript" src="/javascripts/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+<script src="/javascripts/jquery.ui.core.js"></script>
+<script src="/javascripts/jquery.ui.widget.js"></script>
+<script src="/javascripts/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/javascripts/person.js"></script>
+</body>
+</html>

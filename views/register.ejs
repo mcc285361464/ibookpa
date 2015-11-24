@@ -2,18 +2,18 @@
 <html>
 <head>
 	<title>书趴网</title>
-	<link rel="stylesheet" type="text/css" href="../login-register.css">
-	<link rel="stylesheet" type="text/css" href="../bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/login-register.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
 </head>
 <body>
 	<div class="body-content">
 		<div class="div-content">
 			<div class="left">
 				<div class="logo-desc">
-					<img src="../logo.png" alt="书趴网" class="logo">
+					<img src="/images/logo.png" alt="书趴网" class="logo">
 					<span class="desc">唯有读书·交友才靠谱</span>
 				</div>
-				<img src="../bg.jpg" class="pics">
+				<img src="/images/bg.jpg" class="pics">
 			</div>
 			<div class="right">
 				<span class="welcome-register">10秒注册，开启你的书趴之旅</span><br>
@@ -24,19 +24,25 @@
 								<span class="label-username">用户名:&nbsp;</span><input name="username" type="text" placeholder="请输入用户名" style="margin-left:2px;" class="input-username-r"/><br>
 							</li>
 							<li>
-								<span class="label-password">密&nbsp;&nbsp;&nbsp;&nbsp;码: </span><input name="password" type="password" placeholder="请输入密码" class="password" class="input-password-r"/><span class="glyphicon glyphicon-eye-close password-eye" ></span><br>
+								<span class="label-password">密&nbsp;&nbsp;&nbsp;&nbsp;码: </span><input name="password" type="password" placeholder="请输入密码" class="password input-password-r"/><span class="glyphicon glyphicon-eye-close password-eye" ></span><br>
 							</li>
 						</ul>
-						<span class="register-error"></span>
+
+						<%if( typeof(error) != 'undefined') {%>
+							<span class="register-error"><%= error%></span>
+						<%} else {%>
+							<span class="register-error"></span>
+						<%}%>
+
 						<div class="div-btns">
-							<button class="btn btn-default width75 btn-register-now">立即注册</button>
+							<button type="button" class="btn btn-default width75 btn-register-now">立即注册</button>
 							<a href="/users/login" class="forget-password marginL15 fontS14">已是趴客</a>
 						</div>
 					</form>
 				</div>
 		</div>
 	</div>
-	<script type="text/javascript" src="../jquery-1.9.1.js"></script>
-	<script type="text/javascript" src="../login-register.js"></script>
+	<script type="text/javascript" src="/javascripts/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="/javascripts/login-register.js"></script>
 </body>
 </html>

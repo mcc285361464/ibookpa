@@ -26,13 +26,19 @@ $(function(){
 	$('.div-login').delegate('.btn-register','click',function(){
 		window.location = '/users/register';
 	});
-
+	/*
+		检查注册信息
+	*/
 	$('.div-login').delegate('.btn-register-now','click',function(){
-		if($('.input-username-r').val() == '' || $('.input-password-r').val() == '') {
+		var reg = /^1[34578]\d{9}/;
+		var username = $('.input-username-r').val();
+		if(username == '' || $('.input-password-r').val() == '') {
 			$('.register-error').html('用户名或密码没有填写');
-			return false;
+		}else if(!reg.test(username)){
+			$('.register-error').html('用户名应填写手机号码');
 		}else {
 			$('.form-register').submit();
 		}
 	});
+
 });
