@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>书趴网</title>
+	<link rel="stylesheet" type="text/css" href="../login-register.css">
+	<link rel="stylesheet" type="text/css" href="../bootstrap.min.css">
+</head>
+<body>
+	<div class="body-content">
+		<div class="div-content">
+			<div class="left">
+				<div class="logo-desc">
+					<img src="../logo.png" alt="书趴网" class="logo">
+					<span class="desc">唯有读书·交友才靠谱</span>
+				</div>
+				<img src="../bg.jpg" class="pics">
+			</div>
+			<div class="right">
+				<span class="welcome">欢迎登陆</span><br>
+				<div class="div-login">
+					<form action="doLogin" method="post" class="form-login">
+						<ul class="ul-login">
+							<li>
+								<span class="label-username">用户名:&nbsp;</span><input name="username" type="text" placeholder="请输入用户名" style="margin-left:2px;" class="input-username"/><br>
+							</li>
+							<li>
+								<span class="label-password">密&nbsp;&nbsp;&nbsp;&nbsp;码: </span><input name="password" type="password" placeholder="请输入密码" class="input-password"/><br>
+							</li>
+						</ul>
+
+						<%if( typeof(error) != 'undefined') {%>
+							<span class="login-error"><%= error%></span>
+						<%}%>
+						
+						<div class="div-btns">
+							<button type="button" class="btn btn-default width75 btn-login">登陆</button>
+							<button type="button" class="btn btn-default col-md-offset-1 width75 btn-register">注册</button>
+							<a href="" class="forget-password marginL15 fontS14">忘记密码了？</a>
+						</div>
+					</form>
+				</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="../jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="../login-register.js"></script>
+</body>
+</html>
