@@ -1,0 +1,102 @@
+.main-content {
+	padding: 30px 110px 0 110px;
+	width: 1000px;
+	margin: 120px auto 0 auto;
+	border: 1px solid #ccc;
+	background: #FCE5F2;
+}
+
+.main-content-wrapper h1 {
+	display: block;
+	margin: 0 auto;
+	width: 135px;
+}
+
+.main-content-wrapper .logo-desc {
+	width: 750px;
+	margin: 30px auto 0px auto;
+}
+.main-content-wrapper .logo-desc .logo {
+	height: 120px;
+	width: 120px;
+	display: block;
+	margin-left: 120px;
+	border-radius: 80px;
+	z-index: 2;
+}
+.main-content-wrapper .logo-desc .desc {
+	height: 100px;
+	width: 600px;
+	border-radius: 30px;
+	border: 1px solid #2676DC;
+	background: #2676dc;
+	margin-left: 130px;
+	color: #fff;
+	padding: 10px 10px;
+	line-height: 30px;
+}
+.members {
+	margin-top: 50px;
+	height: 410px;
+	margin-left: -5px;
+}
+.member-item {
+	width: 132px;
+	float: left;
+	margin-left: 100px;
+}
+.member-item span {
+	width: 130px;
+	margin: 0 auto;
+	display: block;	
+	text-align: center;
+	margin-top: 5px;
+	height: 30px;
+}
+.member-item .member-job {
+	margin-top: -25px;
+}
+.member-item .member-pic {
+	height: 130px;
+	width: 130px;
+	cursor: pointer;
+}
+.main-content-wrapper .company-born {
+	width: 800px;
+}
+.main-content-wrapper .company-born .born-date {
+	height: 60px;
+	width: 95px;
+	display: block;
+	border-radius: 80px;
+	background: #FF9900;
+	color: #fff;
+	padding:30px 10px 30px 15px;
+	position: absolute;
+	float: left;
+	margin-left: 20px;
+	display: inline-block;
+}
+.main-content-wrapper .company-born .born-date p {
+	font-size: 24px;
+	line-height: 25px;
+	text-align: center;
+}
+.main-content-wrapper .company-born .desc {
+	height: 100px;
+	width: 610px;
+	border-radius: 30px;
+	border: 1px solid #ff9900;
+	background: #2676dc;
+	margin-left: 130px;
+	color: #fff;
+	padding: 10px 10px;
+	line-height: 30px;
+	background: #FF9900;
+	margin-left: 120px;
+	display: inline-block;
+	float: left;
+}
+.clearB {
+	clear: both;
+}

@@ -1,0 +1,65 @@
+.main-content {
+	width: 1000px;
+	margin: 0 auto;
+	border: 1px solid #ccc;
+	margin-top: 100px;
+	background: #FCE5F2;
+}
+.main-content-wrapper {
+	padding-left: 250px;
+	font-size: 20px;
+}
+.main-content-wrapper .title {
+	height: 50px;
+	width: 180px;
+	margin-left: 180px;
+	margin-top: 40px;
+}
+.main-content-wrapper .ul-publish {
+	overflow: hidden;
+}
+.main-content-wrapper .ul-publish li {
+	margin-bottom: 20px;
+}
+.main-content-wrapper .ul-publish .input-theme {
+	width: 300px;
+	border-radius: 30px;
+	height: 30px;
+	padding-left: 5px;
+	outline: none;
+	border: 1px solid #ccc;
+	font-size: 18px;
+	margin-left: 30px;
+}
+.main-content-wrapper .radio-base {
+	margin-left: 50px;
+}
+.main-content-wrapper .ul-publish select{
+	width: 303px;
+	border-radius: 30px;
+	height: 30px;
+	outline: none;
+	border: 1px solid #ccc;
+	font-size: 18px;
+	margin-left: 22px;
+}
+.school-item {
+	cursor: pointer;
+}
+.school-item:hover {
+	background: #FCE5F2;
+	text-align: center;
+}
+.main-content-wrapper .ul-publish .remark {
+	width: 300px;
+	height: 100px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	margin-left: 30px;
+}
+.main-content-wrapper .btn-publish {
+	margin-left: 70px;
+	width: 240px;
+	height: 50px;
+	font-size: 24px;
+}

@@ -1,0 +1,168 @@
+.height80 {
+	height: 100px;
+}
+.body-content .user-pic{
+	display: block;
+	height: 100px;
+	width: 100px;
+	margin-bottom: 20px;
+	border-radius: 50px;
+	margin: 0 auto;
+}
+.body-content .main-content {
+	width: 1006px;
+	border: 1px solid #ccc;
+	margin: 0 auto;
+	margin-top: 20px;
+	padding-top:20px;
+	position: relative;
+}
+.body-content .main-content .ul-tags {
+	overflow: hidden;
+	width: 185px;
+	font-size: 18px;
+	float: left;
+}
+.body-content .main-content .ul-tags li {
+	width: 185px;
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+	border:1px solid #ccc;
+	cursor: pointer;
+}
+.body-content .main-content .ul-tags .tag-title {
+	height:50px;
+	border-radius: 10px 10px 0 0;
+	background: #F8E0E0;
+	cursor: default;
+}
+.main-content .right-block {
+	border-radius: 10px 10px 0 0;
+	float: left;
+	width:770px;
+	border: 1px solid #ccc;
+	margin-left: 15px;
+}
+.main-content .right-block .title {
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+	font-size: 20px;
+	border-bottom: 1px solid #ccc;
+}
+.main-content .right-block .info {
+	padding: 20px 0 0 70px;
+}
+.main-content .right-block .info .basic-info {
+	display: none;
+}
+.main-content .right-block .info .basic-info label {
+	font-size: 20px;
+	margin-left: 10px;
+}
+.main-content .right-block .info .basic-info .ul-user-info {
+	overflow: hidden;
+}
+.main-content .right-block .info .basic-info .ul-user-info li {
+	margin-top: 10px;
+}
+
+.main-content .inputBase {
+	margin-left: 10px;
+	border-radius: 10px;
+	width: 270px;
+	font-size: 20px;
+	padding-left: 5px;
+	border: 1px solid #ccc;
+	outline: none
+}
+.main-content .right-block .info .basic-info .inputRadio {
+	width: 50px;
+	margin-left:20px;
+	font-size: 20px;
+}
+.main-content .right-block .info .basic-info .btn-save {
+	margin-left: 20px;
+	margin-top: 10px;
+	width: 100px;
+}
+.message-info {
+	display: none;
+}
+.message-info .message-item {
+	font-size: 18px;
+	height: 60px;
+}
+.message-info .message-item .message-content {
+	margin: 5px 0 0 20px;
+}
+.friend-manage {
+	display: none;
+}
+.friend-manage .friend-item {
+	font-size: 18px;
+	height: 70px;
+}
+.friend-manage .friend-item img{
+	height: 60px;
+	width: 60px;
+	border-radius: 30px;
+}
+.friend-manage .friend-item span {
+	margin-left: 20px;
+}
+.friend-manage .friend-item .btn-danger {
+	margin-left: 180px;
+}
+.info .my-activities {
+}
+.info .my-activities .ul-activity {
+	overflow: hidden;
+	margin-bottom: 0px;
+}
+.info .my-activities .ul-activity li {
+	height: 35px;
+	width: 110px;
+	float: left;
+	border: 1px solid #ccc;
+	border-bottom: none;
+	cursor: pointer;
+	text-align: center;
+	line-height: 35px;
+	border-radius: 10px 10px 0 0;
+}
+.info .my-activities .ul-activity .li-active{
+	background: #E7D0FB;
+	color: #fff;
+}
+.info .my-activities .user-head {
+	height: 60px;
+	width: 60px;
+	border-radius: 30px;
+}
+.info .my-activities .activity-item {
+	border: 1px solid #ccc;
+	border-right: none;
+	padding: 10px 0 10px 20px;
+	height: 80px;
+	cursor: pointer;
+}
+.info .my-activities .activity-item .title {
+	margin-left: 20px
+}
+.info .my-activities .activity-item:hover .title{
+	color: #FCB686;
+}
+.info .my-activities {
+	display: none;
+}
+.info .my-activities .join-activity {
+	display: none;
+}
+.info .my-activities .end-activity {
+	display: none;
+}
+.change-password .btn-pass-submit {
+	margin-bottom: 40px;
+}

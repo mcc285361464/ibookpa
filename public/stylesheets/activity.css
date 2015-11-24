@@ -1,0 +1,127 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+ol,ul {
+	list-style: none;
+}
+.ie7-height100 {
+	margin-top:100px;
+}
+.div-activity {
+	position: relative;
+	width: 1060px;
+	margin: 0 auto ;
+	border: 1px solid #ccc;
+	background: #FFF4E8;
+}
+.div-activity .img-head-pic {
+	position: absolute;
+	float: left;
+	height: 180px;
+	width: 180px;
+	border-radius: 100px;
+	top: 125px;
+	left: 66px;
+}
+.div-activity .invited-desc {
+	display: block;
+	width: 185px;
+	margin:0 auto;
+	margin-top: 20px;
+}
+.div-activity .activity-title {
+	display: block;
+	margin-left:380px;
+	margin-top:30px;
+}
+.div-activity .ul-activity {
+	overflow: hidden;
+	margin-top: 5px;
+	margin-left: 380px;
+	font-size: 18px;
+}
+.div-activity .ul-activity li {
+	margin-top: 10px;
+}
+.div-activity .ul-user-option {
+	position: absolute;
+	overflow: hidden;
+	top: 300px;
+	right: 60px;
+	font-size: 18px;
+}
+.div-activity .ul-user-option li {
+	float: left;
+	margin-left: 10px;
+	width: 90px;
+}
+.div-activity .ul-user-option li:hover {
+	cursor: pointer;
+}
+.div-activity .activity-comment {
+	width: 900px;
+	border-top: 2px solid #ccc;
+	margin: 0 auto;
+}
+.activity-comment {
+	position: relative;
+}
+.activity-comment .user-comment {
+	width: 800px;
+	height: 90px;
+	font-size: 18px;
+}
+.activity-comment .comment-submit {
+	top: 57px;
+	right: 0;
+	position: absolute;
+	height: 90px;
+	width: 80px;
+	background: #FFC6EE;
+	text-align: center;
+	line-height: 90px;
+	font-size: 25px;
+	color: #A29797;
+	cursor: pointer;
+}
+.activity-comment .comments {
+	width: 900px;
+	margin: 0 auto;
+	border: 1px solid #ccc;
+	margin-top: 20px;
+}
+.activity-comment .comments .comment-item {
+	height: 80px;
+	width: 850px;
+	margin: 0 auto;
+	border-bottom: 1px solid #ccc;
+	position: relative;
+	font-size: 18px;
+}
+.activity-comment .comments .comment-item .comment-user-head {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	height: 55px;
+	width: 55px;
+	border-radius: 30px;
+}
+.marginT20 {
+	margin-top: 20px;
+}
+.activity-comment .comments .comment-item .span-container {
+	position: absolute;
+	top: 25px;
+	left: 100px;
+}
+.activity-comment .comments .comment-item .time {
+	position: absolute;
+	top: 55px;
+	left: 100px;	
+} 
+.activity-comment .comments .comment-item .name {
+	position: absolute;
+	top: 55px;
+	right: 30px;	
+}

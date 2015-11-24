@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>书趴</title>
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="./css/publish.css">
+</head>
+<body>
+	<div class="body-content">
+		<div class="header">
+            <img src="./imgs/logo.png" class="logo">
+            <ul class="mcc-nav">
+                <li><a href="javascript:void(0)">微信</a></li>
+                <li><a href="javascript:void(0)">微博</a></li>
+                <li><a href="javascript:void(0)">加入我们</a></li>
+                <li><a href="javascript:void(0)">活动社区</a></li>
+            </ul>
+            <ul class="lo-re">
+                <li><a href="javascript:void(0)">注册</a></li>
+                <li><a href="javascript:void(0)">登陆</a></li>
+            </ul>
+        </div>            
+
+        <div class="main-content">
+        	<div class="main-content-wrapper">
+        		<h2 class="title">发布邀请</h2>
+        		<ul class="ul-publish">
+        			<li><label for="主题">主题:</label><input name="" type="" class="input-theme"></li>
+        			<li><label for="对象">对象:</label>
+        				<input name="sex" type="radio" class="radio-base">不限
+        				<input name="sex" type="radio" class="radio-base">男
+        				<input name="sex" type="radio" class="radio-base">女
+        			</li>
+        			<li><label for="日期">日期:</label>
+        				<select>
+        					<option>一天内有效</option>
+        					<option>一周内有效</option>
+        					<option>15天有效</option>
+        					<option>30天有效</option>
+        				</select>
+        			</li>
+        			<li><label for="地点">地点:</label><input name="" type="" class="input-theme" data-toggle="modal" data-target="#school_address" readonly="true">
+<!-- Modal -->
+<div class="modal fade" id="school_address" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">选择地点</h4>
+      </div>
+      <div class="modal-body">
+      	<div class="row">
+      		<div class="col-md-5 school-item">
+	      		黑龙江大学图书馆
+      		</div>
+      		<div class="col-md-5 school-item col-md-offset-1">
+      			佳木斯大学第一图书馆
+      		</div>
+      	</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+        			</li>
+
+        			<li><label for="邀请">邀请:</label>
+        				<select>
+        					<option>陪看书</option>
+        					<option>去自习</option>
+        					<option>找书友</option>
+        					<option>换本书</option>
+        					<option>求教材</option>
+        					<option>求补课</option>
+        				</select>
+        			</li>
+        			<li><label for="备注">备注:</label><textarea name="" class="remark"></textarea></li>
+        		</ul>
+        		<button class="btn btn-default btn-info btn-publish">发布活动</button>
+        	</div>
+        </div>
+	</div>
+	<script type="text/javascript" src="./js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="./js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="./js/publish.js"></script>
+</body>
+</html>
