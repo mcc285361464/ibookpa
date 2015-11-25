@@ -43,15 +43,21 @@
                 <div class="info">
                     <!-- 基本信息-->
                     <div class="basic-info info-act">
-                        <ul class="ul-user-info">
-                            <li><span class="red fontS20">*</span><label>昵称</label><input name="nickname" type="text" class="inputBase"></li>
-                            <li><span class="red fontS20">*</span><label>性别</label><input type="radio" name="sex" class="inputRadio"><span class="fontS18">男</span><input type="radio" name="sex" class="inputRadio"><span class="fontS18">女</span></li>
-                            <li><span class="red fontS20">*</span><label>生日</label><input name="birth" id="birth" type="text" class="inputBase"></li>
-                            <li><span class="red fontS20">*</span><label>邮箱</label><input name="email" type="text" class="inputBase"></li>
-                            <li><span class="red fontS20">*</span><label>学校</label><input name="school" type="text" class="inputBase"></li>
-                            <li class="marginL10"><label>签名</label><input name="signature" type="text" class="inputBase"></li>
-                            <div class="btn btn-default btn-save">保存</div>
-                        </ul>
+                        <form action="savePersonInfo" method="post" class="form-save-person-info">
+                            <ul class="ul-user-info">
+                                <li><span class="red fontS20">*</span><label>昵称</label><input name="nickname" type="text" class="inputBase nickname" value=<%=user.nickname%>><span class="nickname-error fontS18 red span-error">
+                                    <% if(typeof(nicknameError)!='undefined'){ %>
+                                        <%= nicknameError%>
+                                    <%}%>
+                                </span></li>
+                                <li><span class="red fontS20">*</span><label>性别</label><input type="radio" name="sex" class="inputRadio" value="男" <%if(user.sex==null || user.sex=='男'){%>checked<%}%>><span class="fontS18">男</span><input type="radio" name="sex" value="女" class="inputRadio" <%if(user.sex=='女'){%>checked<%}%>><span class="fontS18">女</span></li>
+                                <li><span class="red fontS20">*</span><label>生日</label><input name="birth" id="birth" type="text" class="inputBase birth" readonly="true" value=<%=user.birthday%>><span class="birth-error fontS18 red span-error"></span></li>
+                                <li><span class="red fontS20">*</span><label>邮箱</label><input name="email" type="text" class="inputBase email" value=<%=user.mail%>><span class="email-error fontS18 red span-error"></span></li>
+                                <li><span class="red fontS20">*</span><label>学校</label><input name="school" type="text" class="inputBase school" value=<%=user.school%>><span class="school-error fontS18 red span-error"></span></li>
+                                <li class="marginL10"><label>签名</label><input name="signature" type="text" class="inputBase signature" value=<%=user.signature%>><span class="signature-error fontS18 red span-error"></span></li>
+                                <div class="btn btn-default btn-save">保存</div>
+                            </ul>
+                        </form>
                     </div>
                     <!-- base info end-->
                     <!-- 消息中心-->

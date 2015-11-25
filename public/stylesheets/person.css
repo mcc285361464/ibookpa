@@ -55,7 +55,6 @@
 	padding: 20px 0 0 70px;
 }
 .main-content .right-block .info .basic-info {
-	display: none;
 }
 .main-content .right-block .info .basic-info label {
 	font-size: 20px;
@@ -161,6 +160,9 @@
 	display: none;
 }
 .info .my-activities .end-activity {
+	display: none;
+}
+.info .change-password {
 	display: none;
 }
 .change-password .btn-pass-submit {

@@ -1,9 +1,9 @@
 <div class="header">
     <img src="/images/logo.png" class="logo">
     <ul class="mcc-nav">
-        <li><a href="javascript:void(0)">微信</a></li>
-        <li><a href="javascript:void(0)">微博</a></li>
-        <li><a href="javascript:void(0)">加入我们</a></li>
+        <li><a  class="wechat" href="javascript:void(0)">微信/微博</a></li>
+        <img src="/images/2wm_u24.png" class="two-code">
+        <li><a href="javascript:void(0)">发布活动</a></li>
         <li><a href="javascript:void(0)">活动社区</a></li>
     </ul>
     <ul class="lo-re">
@@ -15,4 +15,18 @@
             <li><a href="/users/login">登陆</a></li>
         <%}%>
     </ul>
-</div>        
+</div>  
+<script type="text/javascript" src="/javascripts/jquery-1.9.1.js"></script>      
+<script type="text/javascript">
+    $(function(){
+        var code = $('.two-code');
+        $('.header').delegate('.wechat','mouseover',function(){
+            code.animate({'left':'320px'});
+            code.animate({'top':'80px'});
+        });
+        $('.header').delegate('.wechat','mouseout',function(){
+            code.animate({'top':'0px'});
+            code.animate({'left':'-110px'});
+        });
+    });
+</script>
