@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>书趴</title>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/publish.css">
+</head>
+<body>
+	<div class="body-content">
+        <% include header.ejs%>   
+        <div class="main-content">
+        	<div class="main-content-wrapper">
+        		<h2 class="title">发布邀请</h2>
+            <form action="" method="post" class="form-publish">
+          		<ul class="ul-publish">
+          			<li><label for="主题">主题:</label><input name="theme" type="text" class="input-theme"><span class="red fontS18 theme-error"></span></li>
+          			<li><label for="对象">对象:</label>
+          				<input name="sex" type="radio" class="radio-base">不限
+          				<input name="sex" type="radio" class="radio-base">男
+          				<input name="sex" type="radio" class="radio-base">女
+          			</li>
+          			<li><label for="日期">日期:</label>
+          				<select>
+          					<option>一天内有效</option>
+          					<option selected="true">一周内有效</option>
+          					<option>15天有效</option>
+          					<option>30天有效</option>
+          				</select>
+          			</li>
+          			<li><label for="地点">地点:</label><input name="address" type="text" class="input-theme input-address" data-toggle="modal" data-target="#school_address" readonly="true">
+
+              <!-- Modal -->
+              <div class="modal fade" id="school_address" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document" style="width:1000px;">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">选择地点</h4>
+                    </div>
+                    <div class="modal-body school fontS18">
+                      <% for(var i=0;i<schoolName.length;i=i+3) {%>
+                      	<div class="row">
+                      		<div class="col-md-3 school-item col-md-offset-1">
+                            <%= schoolName[i].schoolName%>
+                            <%i++%>
+                      		</div>
+                          <div class="col-md-3 school-item ">
+                            <%= schoolName[i].schoolName%>
+                            <%i++%>
+                          </div>
+                      		<div class="col-md-3 school-item ">
+                      			<%= schoolName[i].schoolName%>
+                      		</div>
+                      	</div>
+                      <% }%>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default btn-modal-close" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+                <span class="red fontS18 address-error"></span>
+          			</li>
+
+          			<li><label for="邀请">邀请:</label>
+          				<select>
+          					<option>陪看书</option>
+          					<option>去自习</option>
+          					<option>找书友</option>
+          					<option>换本书</option>
+          					<option>求教材</option>
+          					<option>求补课</option>
+          				</select>
+          			</li>
+          			<li><label for="备注">备注:</label><textarea name="" class="remark"></textarea><span class="red fontS18 remark-error"></span></li>
+          		</ul>
+            </form>
+        		<button class="btn btn-default btn-info btn-publish marginB20">发布活动</button>
+        	</div>
+        </div>
+      <% include footer.ejs%>
+	</div>
+	<script type="text/javascript" src="/javascripts/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/javascripts/publish.js"></script>
+</body>
+</html>

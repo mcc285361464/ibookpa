@@ -1,9 +1,10 @@
 <div class="header">
     <img src="/images/logo.png" class="logo">
     <ul class="mcc-nav">
-        <li><a  class="wechat" href="javascript:void(0)">微信/微博</a></li>
-        <img src="/images/2wm_u24.png" class="two-code">
-        <li><a href="javascript:void(0)">发布活动</a></li>
+        <li><a  class="two-code" href="http://weibo.com/shupa">微信/微博</a></li>
+        <img src="/images/2wm_u24.png" class="wechat-code">
+        <img src="/images/2wm_u24.png" class="weibo-code">
+        <li><a href="/publish">发布活动</a></li>
         <li><a href="javascript:void(0)">活动社区</a></li>
     </ul>
     <ul class="lo-re">
@@ -19,14 +20,20 @@
 <script type="text/javascript" src="/javascripts/jquery-1.9.1.js"></script>      
 <script type="text/javascript">
     $(function(){
-        var code = $('.two-code');
-        $('.header').delegate('.wechat','mouseover',function(){
-            code.animate({'left':'320px'});
+        var code = $('.wechat-code');
+        var wcode = $('.weibo-code');
+
+        $('.header').delegate('.two-code','mouseover',function(){
+            code.animate({'left':'280px'});
             code.animate({'top':'80px'});
+            wcode.animate({'right':'840px'});
+            wcode.animate({'top':'80px'});
         });
-        $('.header').delegate('.wechat','mouseout',function(){
+        $('.header').delegate('.two-code','mouseout',function(){
             code.animate({'top':'0px'});
             code.animate({'left':'-110px'});
+            wcode.animate({'top':'0px'});
+            wcode.animate({'right':'-110px'});
         });
     });
 </script>

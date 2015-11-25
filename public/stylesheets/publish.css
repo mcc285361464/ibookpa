@@ -48,7 +48,6 @@
 }
 .school-item:hover {
 	background: #FCE5F2;
-	text-align: center;
 }
 .main-content-wrapper .ul-publish .remark {
 	width: 300px;
@@ -58,8 +57,9 @@
 	margin-left: 30px;
 }
 .main-content-wrapper .btn-publish {
-	margin-left: 70px;
+	margin-left: 76px;
 	width: 240px;
 	height: 50px;
 	font-size: 24px;
+	margin-bottom: 20px;
 }

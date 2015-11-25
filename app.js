@@ -31,12 +31,16 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-
+app.use(function(req, res, next){ 
+  res.locals.session = req.session; 
+  next(); 
+});
 app.use('/', routes);
 //登陆一定要在验证是否登陆前面
 app.post('/users/doLogin',users);
 app.use(function (req, res, next) {
   if (req.session.user) {  // 判断用户是否登录
+    console.log('1');
     next();
   } else {
     // 解析用户请求的路径
