@@ -40,7 +40,7 @@ app.use('/', routes);
 app.post('/users/doLogin',users);
 app.use(function (req, res, next) {
   if (req.session.user) {  // 判断用户是否登录
-    console.log('1');
+    console.log('is login');
     next();
   } else {
     // 解析用户请求的路径

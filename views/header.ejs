@@ -8,9 +8,9 @@
         <li><a href="javascript:void(0)">活动社区</a></li>
     </ul>
     <ul class="lo-re">
-        <%if(typeof(user) != 'undefined') {%>
+        <%if(typeof(session.user) != 'undefined') {%>
             <li><a href="/users/logout">退出</a></li>
-            <li><a href="/users/personal"><%=user.nickname%></a></li>
+            <li><a href="/users/personal"><%=session.user.nickname%></a></li>
         <%} else {%>
             <li><a href="/users/register">注册</a></li>
             <li><a href="/users/login">登陆</a></li>

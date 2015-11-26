@@ -45,20 +45,48 @@
                     <div class="basic-info info-act">
                         <form action="savePersonInfo" method="post" class="form-save-person-info">
                             <ul class="ul-user-info">
-                                <li><span class="red fontS20">*</span><label>昵称</label><input name="nickname" type="text" class="inputBase nickname" value=<%=user.nickname%>><span class="nickname-error fontS18 red span-error">
+                                <li><span class="red fontS20">*</span><label>昵称</label><input name="nickname" type="text" class="inputBase nickname" value=<%=session.user.nickname%>><span class="nickname-error fontS18 red span-error">
                                     <% if(typeof(nicknameError)!='undefined'){ %>
                                         <%= nicknameError%>
                                     <%}%>
                                 </span></li>
-                                <li><span class="red fontS20">*</span><label>性别</label><input type="radio" name="sex" class="inputRadio" value="男" <%if(user.sex==null || user.sex=='男'){%>checked<%}%>><span class="fontS18">男</span><input type="radio" name="sex" value="女" class="inputRadio" <%if(user.sex=='女'){%>checked<%}%>><span class="fontS18">女</span></li>
-                                <li><span class="red fontS20">*</span><label>生日</label><input name="birth" id="birth" type="text" class="inputBase birth" readonly="true" value=<%=user.birthday%>><span class="birth-error fontS18 red span-error"></span></li>
-                                <li><span class="red fontS20">*</span><label>邮箱</label><input name="email" type="text" class="inputBase email" value=<%=user.mail%>><span class="email-error fontS18 red span-error"></span></li>
-                                <li><span class="red fontS20">*</span><label>学校</label><input name="school" type="text" class="inputBase school" value=<%=user.school%>><span class="school-error fontS18 red span-error"></span></li>
-                                <li class="marginL10"><label>签名</label><input name="signature" type="text" class="inputBase signature" value=<%=user.signature%>><span class="signature-error fontS18 red span-error"></span></li>
+                                <li><span class="red fontS20">*</span><label>性别</label><input type="radio" name="sex" class="inputRadio" value="男" <%if(session.user.sex==null || session.user.sex=='男'){%>checked<%}%>><span class="fontS18">男</span><input type="radio" name="sex" value="女" class="inputRadio" <%if(session.user.sex=='女'){%>checked<%}%>><span class="fontS18">女</span></li>
+                                <li><span class="red fontS20">*</span><label>生日</label><input name="birth" id="birth" type="text" class="inputBase birth" readonly="true" value=<%=session.user.birthday%>><span class="birth-error fontS18 red span-error"></span></li>
+                                <li><span class="red fontS20">*</span><label>邮箱</label><input name="email" type="text" class="inputBase email" value=<%=session.user.mail%>><span class="email-error fontS18 red span-error"></span></li>
+                                <li><span class="red fontS20">*</span><label>学校</label><input name="school" type="text" class="inputBase school" value=<%=session.user.school%> data-toggle="modal" data-target="#schools" readonly><span class="school-error fontS18 red span-error"></span></li>
+                                <li class="marginL10"><label>签名</label><input name="signature" type="text" class="inputBase signature" value=<%=session.user.signature%>><span class="signature-error fontS18 red span-error"></span></li>
                                 <div class="btn btn-default btn-save">保存</div>
                             </ul>
                         </form>
                     </div>
+                   
+                    <!--Schools Modal -->
+                    <div class="modal fade" id="schools" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                      <div class="modal-dialog" role="document" style="width:800px;">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                <ul class="province-wrapper">
+                                        <li class="province-item li-active">黑龙江省</li>
+                                    <% for(var i=1;i<provinces.length;i++){ %>
+                                        <li class="province-item"><%=provinces[i].province%></li>
+                                    <%}%>
+                                </ul>
+                            </h4>
+                          </div>
+                          <div class="modal-body province-schools">
+                                <ul class="schools-wrapper fontS18">
+
+                                </ul>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                     <!-- base info end-->
                     <!-- 消息中心-->
                     <div class="message-info  info-act">

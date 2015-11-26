@@ -1,5 +1,46 @@
 $(function(){
 	/*
+		用js延缓添加默认黑龙江省的学校
+	*/
+	var schools = [
+			'<li class="school-item">黑龙江大学</li>',
+			'<li class="school-item">哈尔滨工业大学</li>',
+			'<li class="school-item">哈尔滨工程大学</li>',
+			'<li class="school-item">东北林业大学</li>',
+			'<li class="school-item">东北农业大学</li>',
+			'<li class="school-item">哈尔滨理工大学</li>',
+			'<li class="school-item">佳木斯大学</li>',
+			'<li class="school-item">齐齐哈尔大学</li>',
+			'<li class="school-item">东北石油大学</li>',
+			'<li class="school-item">黑龙江八一农垦大学</li>',
+			'<li class="school-item">哈尔滨医科大学</li>',
+			'<li class="school-item">黑龙江中医药大学</li>',
+			'<li class="school-item">哈尔滨师范大学</li>',
+			'<li class="school-item">哈尔滨商业大学</li>',
+			'<li class="school-item">哈尔滨学院</li>',
+			'<li class="school-item">黑龙江工程学院</li>',
+			'<li class="school-item">黑龙江科技大学</li>',
+			'<li class="school-item">牡丹江医学院</li>',
+			'<li class="school-item">齐齐哈尔医学院</li>',
+			'<li class="school-item">牡丹江师范学院</li>',
+			'<li class="school-item">大庆师范学院</li>',
+			'<li class="school-item">黑龙江财经学院</li>',
+			'<li class="school-item">哈尔滨体育学院</li>',
+			'<li class="school-item">黑龙江东方学院</li>',
+			'<li class="school-item">绥化学院</li>',
+			'<li class="school-item">黑河学院</li>',
+			'<li class="school-item">哈尔滨金融学院</li>',
+			'<li class="school-item">齐齐哈尔工程学院</li>',
+			'<li class="school-item">哈尔滨华德学院</li>',
+			'<li class="school-item">黑龙江外国语学院</li>',
+			'<li class="school-item">哈尔滨剑桥学院</li>',
+			'<li class="school-item">哈尔滨石油学院</li>',
+			'<li class="school-item">哈尔滨广厦学院</li>',
+			'<li class="school-item">哈尔滨远东理工学院</li>',
+			'<li class="school-item">黑龙江工业学院</li>'
+	].join('');
+	$('.schools-wrapper').append(schools);
+	/*
 		日期插件
 	*/
 	$( "#birth" ).datepicker({
@@ -111,6 +152,33 @@ $(function(){
 			$('.form-save-person-info').submit();
 		}
 
+	});
+	//通过省份选择学校
+	$('.province-wrapper').delegate('.province-item','click',function(err,result){
+		$('.province-wrapper li').removeClass('li-active');
+		$(this).addClass('li-active');
+			var province = $(this).html();
+		$.ajax({
+			type:'post',  
+		    url:'/changeSchool',  
+		    data:{province:province},  
+		    cache:false,  
+		    dataType:'json',  
+		    success:function(data){  
+		    	var str = '';
+		    	var schools = data.msg;
+		    	for(var i=0;i<schools.length;i++) {
+		    		str += '<li class="school-item">'+schools[i].schoolName+'</li>'
+		    	}
+		    	$('.schools-wrapper').html(str);
+		    },  
+		    error:function(){}  
+		});
+	});
+
+	$('.schools-wrapper').delegate('li','click',function(){
+		$('.school').val($(this).html());
+		$('.btn-close').click();
 	});
 
 });

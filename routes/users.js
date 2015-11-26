@@ -63,8 +63,14 @@ router.get('/personal', function (req, res, next) {
 		if(err) {
 			console.log(err);
 		}else {
-			user = results[0];
-			res.render('person',{user:user});
+			conn.query('select province from t_school group by province order by id',function(err,results){
+				if(err) {
+					console.log('error:'+err);
+				}else {
+					user = results[0];
+					res.render('person',{'provinces':results});
+				}
+			});
 		}
 	});
 });
@@ -85,8 +91,19 @@ router.post('/savePersonInfo', function (req, res, next) {
 				if(err) {
 					console.log(err);
 				}else {
-					console.log(results);
-					res.render('person');		
+					conn.query('select province from t_school group by province order by id',function(err,results){
+					if(err) {
+							console.log('error:'+err);
+						}else {
+							user.nickname = nickname;
+							user.sex = sex;
+							user.birthday = birth;
+							user.mail = email;
+							user.school = school;
+							user.signature = signature;
+							res.render('person',{'provinces':results});
+						}
+					});
 				}
 			});
 		}else {

@@ -7,9 +7,11 @@ $(function(){
 		if(theme == '') {
 			$('.theme-error').html('主题不能为空');
 		}else if(address == '') {
-			$('.address-error').html('主题不能为空');
+			$('.ul-publish .span-err').html('');
+			$('.address-error').html('地点不能为空');
 		}else if(remark == '') {
-			$('.remark-error').html('主题不能为空');
+			$('.ul-publish .span-err').html('');
+			$('.remark-error').html('备注不能为空');
 		}else {
 			$('.form-publish').submit();
 		}
