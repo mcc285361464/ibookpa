@@ -7,69 +7,76 @@
         <title>ibookpa</title>   
         <!--你自己的样式文件 -->
         <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
-        <link href="/stylesheets/style.css" rel="stylesheet">        
-      	
+        <!--
+        <link rel="stylesheet" href="/stylesheet/themes/default/default.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="/stylesheet/themes/light/light.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="/stylesheet/themes/dark/dark.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="/stylesheet/themes/bar/bar.css" type="text/css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="/stylesheet/nivo-slider.css" /> 
+        -->
+        <link href="/stylesheets/style.css" rel="stylesheet" />        
+
     </head>
     <body>
         <div class="body-content">
 
             <% include header.ejs%>      
-
             <div class="bg-turn">
-                <img src="/images/bg1.jpg">
-                <img src="/images/bg2.jpg">
+                <img src="/images/bg1.jpg" class="bg1"/>
+                <img src="/images/bg2.jpg" class="bg2"/>
                 <div class="pub-act">发&nbsp;布&nbsp;活&nbsp;动</div>
             </div>
             <div class="div-activity">
                 <div class="activity-content">
-                    <div class="activity-item">
-                        <img src="/images/img1.jpg" class="img-head">
-                        <span class="activity-title">约不约</span>
-                        <ul class="ul-activity">
-                            <li><span class="glyphicon glyphicon-user"></span><span class="marginL20">ccMa</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a>更多资料</a></li>
-                            <li><span class="glyphicon glyphicon-time"></span><span class="marginL20">发布日期</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>2015-11-11 09:00</span></li>
-                            <li><span class="glyphicon glyphicon-time"></span><span class="marginL20">结束日期</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>2015-11-17 09:00</span></li>
-                            <li><span class="glyphicon glyphicon-map-marker"></span><span class="marginL20">约定地点</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>黑大小树林</span></li>
-                            <li><span class="glyphicon glyphicon-tag"></span><span class="marginL20">没有备注</span></li>
-                            <li><span class="marginL20">男</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>0</span><span>人报名</span></li>
-                        </ul>
-                        <ul class="ul-user-option">
-                            <li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;<span>关注</span></li>
-                            <li><span class="glyphicon glyphicon-edit"></span>&nbsp;<span>评论</span></li>
-                            <li data-toggle="modal" data-target="#personal-message"><span class="glyphicon glyphicon-envelope"></span>&nbsp;<span>私信</span></li>
-                            <li><span class="glyphicon glyphicon-plus"></span>&nbsp;<span>报名</span></li>
-                        </ul>
-
-                            <!-- Modal -->
-                            <div class="modal fade" id="personal-message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                              <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">私信</h4>
-                                  </div>
-                                  <div class="modal-body">
-                                    <textarea class="form-control textarea-personal" rows="3"></textarea>
-                                  </div>
-                                  <div class="modal-footer">
-                                  <button type="button" class="btn btn-default" data-dismiss="modal">发送</button>
-                                  <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                  </div>
-                                </div>
-                              </div>
+                        <% for(var i=0;i<acts.length;i++) {%>
+                            <div class="activity-item">
+                                <a href="/users/visit/32"><img src="/images/img1.jpg" class="img-head"></a>
+                                <span class="activity-title"><%= acts[i].theme%></span>
+                                <ul class="ul-activity">
+                                    <li><span class="glyphicon glyphicon-user"></span><span class="marginL20">ccMa</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a>更多资料</a></li>
+                                    <li><span class="glyphicon glyphicon-time"></span><span class="marginL20">发布日期</span>&nbsp;&nbsp;&nbsp;&nbsp;<span><%= acts[i].createDate%></span></li>
+                                    <li><span class="glyphicon glyphicon-time"></span><span class="marginL20">结束日期</span>&nbsp;&nbsp;&nbsp;&nbsp;<span><%= acts[i].finishDate%></span></li>
+                                    <li><span class="glyphicon glyphicon-map-marker"></span><span class="marginL20">约定地点</span>&nbsp;&nbsp;&nbsp;&nbsp;<span><%= acts[i].address%></span></li>
+                                    <li><span class="glyphicon glyphicon-tag"></span><span class="marginL20"><%= acts[i].remark%></span></li>
+                                    <li><span class="marginL20"><%= acts[i].objectSex%></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><%= acts[i].applyCount%></span><span>人报名</span></li>
+                                </ul>
+                                <ul class="ul-user-option">
+                                    <li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;<span>关注</span></li>
+                                    <li><span class="glyphicon glyphicon-edit"></span>&nbsp;<span>评论</span></li>
+                                    <li data-toggle="modal" data-target="#personal-message"><span class="glyphicon glyphicon-envelope"></span>&nbsp;<span>私信</span></li>
+                                    <li><span class="glyphicon glyphicon-plus"></span>&nbsp;<span>报名</span></li>
+                                </ul>
+            
+                                   <!-- Modal -->
+                                    <div class="modal fade" id="personal-message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                      <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">私信</h4>
+                                          </div>
+                                          <div class="modal-body">
+                                            <textarea class="form-control textarea-personal" rows="3"></textarea>
+                                          </div>
+                                          <div class="modal-footer">
+                                          <button type="button" class="btn btn-default" data-dismiss="modal">发送</button>
+                                          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
                             </div>
-                    </div>
-                    <!--activity item end-->
-                        
+                            <!--activity item end-->
+                        <%}%>
                 </div>
             </div>
-			
-			<% include footer.ejs%>
+            <% include footer.ejs%> 
 
         </div>
         <!-- 如果要使用Bootstrap的js插件，必须先调入jQuery -->
         <script src="/javascripts/jquery-1.9.1.js"></script>
         <script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/javascripts/jquery.nivo.slider.js"></script>
         <script type="text/javascript" src="/javascripts/index.js"></script>
     </body>
 </html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ibookpa</title>   
+        <!--你自己的样式文件 -->
+        <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
+        <link href="/stylesheets/style.css" rel="stylesheet" />        
+		<link href="/stylesheets/userPage.css" rel="stylesheet" />        
+    </head>
+    <body>
+        <div class="body-content">
+
+        <% include header.ejs%>      
+			
+			<div class="body-wrapper">
+				<div class="main">
+					<img src="/images/img1.jpg" class="user-picture">
+					<ul class="btn-group">
+						<li class="personal-message-btn">私信</li>
+						<li class="attentive">关注</li>
+					</ul>
+					<div class="personal-message">
+						<textarea></textarea>
+						<button type="button" class="btn btn-default btn-sub-per-mes">提交</button>
+					</div>
+					<ul class="user-info fontS18">
+						<li><%=user.nickname%></li>
+						<li><%=user.sex%></li>
+						<li><%=user.school%></li>
+						<li>签名：<%=user.signature%></li>
+					</ul>
+					<ul class="sign-card fontS18">
+						<li>已发起<span class="fontS25"><%=publicCount%></span>&nbsp;个活动</li>
+						<li>参与过<span class="fontS25"><%=joinCount%></span>&nbsp;个活动</li>
+						<li>被<span class="fontS25"><%=attentived%></span>&nbsp;个人关注</li>
+					</ul>
+				</div>
+			</div>
+
+        <% include footer.ejs%> 
+
+        </div>
+        <!-- 如果要使用Bootstrap的js插件，必须先调入jQuery -->
+        <script src="/javascripts/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+        <script src="/javascripts/userPage.js"></script>
+    </body>
+</html>

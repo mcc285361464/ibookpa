@@ -38,6 +38,9 @@ app.use(function(req, res, next){
 app.use('/', routes);
 //登陆一定要在验证是否登陆前面
 app.post('/users/doLogin',users);
+//注册
+app.post('/users/doRegister',users);
+/* 
 app.use(function (req, res, next) {
   if (req.session.user) {  // 判断用户是否登录
     console.log('is login');
@@ -60,6 +63,7 @@ app.use(function (req, res, next) {
     }
   }
 });
+*/
 app.use('/users', users);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

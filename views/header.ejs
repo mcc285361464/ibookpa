@@ -1,14 +1,15 @@
 <div class="header">
     <img src="/images/logo.png" class="logo">
     <ul class="mcc-nav">
-        <li><a  class="two-code" href="http://weibo.com/shupa">微信/微博</a></li>
+        <li><a  class="two-code" href="http://weibo.com/shupa" target="_blank">微信/微博</a></li>
         <img src="/images/2wm_u24.png" class="wechat-code">
         <img src="/images/2wm_u24.png" class="weibo-code">
         <li><a href="/publish">发布活动</a></li>
         <li><a href="javascript:void(0)">活动社区</a></li>
     </ul>
     <ul class="lo-re">
-        <%if(typeof(session.user) != 'undefined') {%>
+        <%= session.user%>
+        <%if(typeof(session.user) != 'undefined' && session.user != null) {%>
             <li><a href="/users/logout">退出</a></li>
             <li><a href="/users/personal"><%=session.user.nickname%></a></li>
         <%} else {%>

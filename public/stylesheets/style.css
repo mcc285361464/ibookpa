@@ -52,10 +52,7 @@ ul,ol {
 	background:#000;
 	top: 0px;
 	position:fixed;
-	filter:alpha(opacity=50);   
-	-moz-opacity:0.5;   
-	-khtml-opacity: 0.5;   
-	opacity: 0.5;   
+	background: rgba(0,0,0,0.4);
 	z-index:999;
 }
 .body-content .logo{

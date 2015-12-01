@@ -1,5 +1,5 @@
 .main-content {
-	padding: 30px 110px 0 110px;
+	padding: 30px 110px 20px 110px;
 	width: 1000px;
 	margin: 120px auto 0 auto;
 	border: 1px solid #ccc;
@@ -63,6 +63,7 @@
 }
 .main-content-wrapper .company-born {
 	width: 800px;
+	margin-bottom: 20px;
 }
 .main-content-wrapper .company-born .born-date {
 	height: 60px;

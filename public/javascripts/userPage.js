@@ -1,0 +1,21 @@
+$(function(){
+	$('.user-picture').mouseover(function(){
+		$(this).stop().animate({
+			left:'85px',
+			top:'35px',
+		    height:'230px',
+		    width:'230px'
+		},'fast');
+	});
+	$('.user-picture').mouseout(function(){
+		$(this).stop().animate({
+			left:'100px',
+			top:'50px',
+		    height:'200px',
+		    width:'200px'
+		},'fast');
+	});
+	$('.btn-group').delegate('.personal-message-btn','click',function(){
+		$('.personal-message').css('display','block');
+	})
+});

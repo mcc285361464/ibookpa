@@ -1,3 +1,10 @@
+$(window).load(function(){
+    $('#slider').nivoSlider({
+    	pauseTime:6000,
+    	directionNav: false,
+    	controlNav:false
+    });
+})
 $(function(){	
 	var btn_pub = $('.pub-act');
 	btn_pub.animate({
@@ -11,5 +18,4 @@ $(function(){
 	btn_pub.animate({
 		'font-size':'45px'
 	},500);	
-
 });

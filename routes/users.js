@@ -3,6 +3,7 @@ var router = express.Router();
 var conn = require('../utils/mysql');
 var md5 = require('md5');
 var session = require('express-session');
+var async = require('async')
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -28,32 +29,38 @@ router.post('/users/doLogin', function (req, res, next) {
 	  		res.render('login',{'error':'用户名或密码错误'});
 	  	}else {
 	  		sess.user = results[0];
-	  		res.render('index',{user:sess.user});
+	  		res.redirect('/');
 	  	}	
 	  }
   });
 });
 /*进行注册*/
-router.post('/doRegister', function (req, res, next) {
+router.post('/users/doRegister', function (req, res, next) {
   var username = req.body.username;
   var sess = req.session;
-	conn.query ('select * from t_users where username=?',[username],function(error, results, fields) {
+  console.log('lababa');
+  conn.query ('select * from t_users where username=?',[username],function(error, results, fields) {
+	  if(error) {
+	  	console.log(error);
+	  } else if(results == '') {
+		conn.query('insert into t_users(username,password) value(?,?)',[username,md5(req.body.password)],function(error, results, fields) {
 		  if(error) {
 		  	console.log(error);
-		  } else if(results == '') {
-			conn.query('insert into t_users(username,password) value(?,?)',[username,md5(req.body.password)],function(error, results, fields) {
-			  if(error) {
-			  	console.log(error);
-			  } else {
-			  	sess.user = {username:username};
-			  	console.log(sess.user);
-			  	res.render('person',{user:sess.user});
-			  }
-			});
 		  } else {
-		  	res.render('register',{'error':'该用户已经注册'});
+		  	sess.user = {username:username};
+		  	conn.query('select province from t_school group by province order by id',function(err,results){
+				if(err) {
+					console.log('error:'+err);
+				}else {
+					res.render('person',{'provinces':results});
+				}
+			});
 		  }
-	});
+		});
+	  } else {
+	  	res.render('register',{'error':'该用户已经注册'});
+	  }
+  });
 });
 /*跳到个人中心*/
 router.get('/personal', function (req, res, next) {
@@ -115,8 +122,53 @@ router.post('/savePersonInfo', function (req, res, next) {
 router.get('/logout' , function (req, res, next) {
 	var sess = req.session;
 	req.session.user = null;
-	res.render('index');
+	res.redirect('/');
 });
 
+//进入访客页面 userPage.ejs
+router.get('/visit/:user_id' , function (req, res, next) {
+	var user_id = req.params.user_id;
+	var user = null;
+	var publicCount = null;
+	var joinCount = null;
+	var attentived = null;
+	async.waterfall([  
+	    function(callback){
+	    	conn.query('select nickname,sex,school,signature from t_users where id=?',[user_id],function(err,results){
+				callback(err, results[0]);  
+			});
+	    },
+	    function (data, callback){
+			user = data;
+			conn.query('select id from t_useractivity where launcherId=?',[user_id],function(err,data){
+	        	callback(err,user,data.length);  
+	        });  
+		},
+		function (user,data2, callback){
+			publicCount = data2;
+			conn.query('select id from t_betweenuseractivity where receiverId=?',[user_id],function(err,data){
+	        	callback(err,user,publicCount,data.length);  
+	        });  
+		},
+		function (user,publicCount,data3, callback){
+			joinCount = data3;
+			conn.query('select id from t_friends where friendId=?',[user_id],function(err,data){
+	        	callback(err,user,publicCount,joinCount,data.length);  
+	        });  
+		},
+    ], function (err,d0,d1,d2,d3) {  
+    	if(err) {
+    		console.log(err);
+    	}else {
+			res.render('userPage',{user:d0,publicCount:d1,joinCount:d2,attentived:d3});
+    	}
+    });  
+	
+}) 
+
+//关于我们
+router.get('/aboutUs' , function (req, res, next) {
+	res.render('aboutUs');
+});
 
 module.exports = router;

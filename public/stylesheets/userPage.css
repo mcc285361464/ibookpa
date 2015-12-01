@@ -1,0 +1,84 @@
+.body-content .body-wrapper {
+	margin-top: 100px;
+	padding: 10px 170px;
+	border: 1px solid red;
+}
+.body-wrapper .main {
+	width: 1000px;
+	height: 430px;
+	border: 1px solid #ccc;
+	position: relative;
+	background: #F9E1E1;
+}
+ .main .user-picture {
+ 	position: absolute;
+ 	height: 200px;
+ 	width: 200px;
+ 	border-radius: 150px;
+ 	left: 100px;
+ 	top: 50px;
+ }
+ .main .btn-group {
+ 	overflow: hidden;
+ 	position: absolute;
+ 	top: 300px;
+ 	left: 100px;
+ }
+ .main .btn-group li {
+ 	height: 30px;
+ 	cursor: pointer;
+ 	width: 100px;
+ 	background: #fff;
+ 	border-radius: 5px;
+ 	line-height: 30px;
+ 	text-align: center;
+ 	border: 1px solid #000;
+ 	float: left;
+ 	margin-right: 20px;
+ }
+ .main .btn-group li:hover{
+ 	background: #AB9898;
+ 	color: #fff;
+ }
+.main .user-info {
+	overflow: hidden;
+	position: absolute;
+	left: 390px;
+	top: 50px;
+	width: 230px;
+}
+.main .user-info li{
+	margin-top: 20px;
+}
+.main .sign-card {
+	overflow: hidden;
+	position: absolute;
+	left: 650px;
+	top: 50px;
+}
+.main .sign-card li {
+	width: 250px;
+	height: 100px;
+	border: 1px dashed #F6A6A6;
+	line-height: 100px;
+	text-align: center;
+	background: #FAE6E6;
+}
+.main .sign-card li span {
+	font-style:italic;
+}
+.main .personal-message {
+	position: absolute;
+	left: 90px;
+	top: 350px;
+	display: none;
+}
+.main .personal-message textarea {
+	width: 300px;
+	height: 55px;
+}
+.main .personal-message .btn-sub-per-mes {
+	position: absolute;
+	top: 20px;
+	left: 310px;
+}

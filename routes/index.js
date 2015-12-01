@@ -5,7 +5,15 @@ var conn = require('../utils/mysql');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	res.render('index', { title: 'Express' });
+	var nowDateT = Math.round(new Date().getTime()/1000);
+	conn.query('select * from t_useractivity where activityDateSign>?',[nowDateT],function(err,results){
+		if(err) {
+			console.log(err);
+		}else {
+			console.log(results);
+			res.render('index',{acts:results});
+		}
+	});
 });
 
 //发布活动
@@ -102,7 +110,7 @@ router.post('/publishActivity',function(req,res,next) {
 	}
 	var endDate = getDate(endDateT);
 	conn.query('insert into t_useractivity(activityDateSign,createDate,theme,objectSex,finishDate,address,activityWay,remark,applycount,launcherId) values(?,?,?,?,?,?,?,?,?)',
-	[startDateT,startDate,theme,sex,endDate,address,way,remark,applyCount,user.id],function(err,results){
+	[endDateT,startDate,theme,sex,endDate,address,way,remark,applyCount,user.id],function(err,results){
 		if(err) {
 			console.log(err);
 		}else {
