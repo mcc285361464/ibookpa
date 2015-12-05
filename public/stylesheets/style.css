@@ -7,6 +7,9 @@
 	text-decoration: none;
 	color:#fff;
 }
+.ie7-height100 {
+	margin-top:100px;
+}
 body {
 	background:url('../images/headeBg1.jpg');
 	font-family: "黑体";
@@ -14,17 +17,35 @@ body {
 ul,ol {
 	list-style: none;
 }
+.gray {
+	color:#696969;
+}
+.green {
+	color:green;
+}
+.italic {
+	font-style:italic;
+}
+.logo {
+	cursor: pointer;
+}
 .clear-both {
 	clear: both;
 }
 .red {
 	color:red;
 }
+.fontS14 {
+	font-size: 14px;
+}
 .fontS20 {
 	font-size: 20px;
 }
 .fontS18 {
 	font-size :18px;
+}
+.fontS22 {
+	font-size :22px;
 }
 .fontS25 {
 	font-size: 25px;

@@ -90,60 +90,70 @@
                     <!-- base info end-->
                     <!-- 消息中心-->
                     <div class="message-info  info-act">
-                        <div class="message-item">
-                            <div class="message-from">
-                                <span>皮蛋</span>给你的评论
-                                <span>(2015-11-22 11:11)</span>
+                        <%for(var i=0;i<mes.length;i++){%>
+                            <div class="message-item">
+                                <div class="message-from">
+                                    <span class="gray italic fontS20"><%=mes[i].nickname%></span>给你的评论
+                                    <span>(<%=mes[i].date%>)</span>
+                                </div>
+                                <div class="message-content">
+                                    <%=mes[i].messageContent%>
+                                </div>
                             </div>
-                            <div class="message-content">
-                                啊啊啊啊啊皮蛋我爱你，你的外观最美艳。
-                            </div>
-                        </div>
+                        <%}%>
                     </div>
                     <!-- message end -->
                     <!-- 好友管理-->
                     <div class="friend-manage  info-act">
-                        <div class="friend-item">
-                            <img src="/images/img1.jpg">
-                            <span>火腿蛋</span>
-                            <span>哈尔滨蛋蛋学院</span>
-                            <span>female</span>
-                            <span class="btn btn-danger">删除好友</span>
-                        </div>
+                        <%for(var i=0;i<friends.length;i++){%>
+                            <div class="friend-item f<%=friends[i].id%>">
+                                <img src="/images/img1.jpg">
+                                <span><%=friends[i].nickname%></span>
+                                <span><%=friends[i].school%></span>
+                                <span><%=friends[i].sex%></span>
+                                <span class="btn btn-danger del-btn" data-id="<%=friends[i].id%>">删除好友</span>
+                            </div>
+                        <%}%>
                     </div>
                     <!-- friend manage end-->
                     <!-- 我的活动-->
                     <div class="my-activities fontS18 info-act">
                         <ul class="ul-activity">
                             <li class="li-active" id="li-self">我发起的</li>
-                            <li class="" id="li-join">我参与的</li>
+                            <li class="" id="li-join">我报名的</li>
                             <li class="" id="li-end">已结束的</li>
                         </ul>
                         <div class="self-activity activity">
-                            <div class="activity-item">
-                                <img src="/images/img1.jpg" class="user-head">
-                                <span class="title">皮蛋之旅</span>
-                            </div>
+                            <%for(var i=0;i<selfAct.length;i++){%>
+                                <div class="activity-item">
+                                    <img src="/images/img1.jpg" class="user-head">
+                                    <span class="span-title"><%=selfAct[i].theme%></span>
+                                </div>
+                            <%}%>
                         </div>
 
                         <div class="join-activity activity">
-                            <div class="activity-item">
-                                <img src="/images/img1.jpg" class="user-head">
-                                <span class="title">鸭蛋之旅</span>
-                            </div>
+                            <%for(var i=0;i<applyAct.length;i++){%>
+                                <div class="activity-item">
+                                    <img src="/images/img1.jpg" class="user-head">
+                                    <span class="span-title"><%=applyAct[i].theme%></span>
+                                </div>
+                            <%}%>
                         </div>
                         <div class="end-activity activity">
-                             <div class="activity-item">
-                                <img src="/images/img1.jpg" class="user-head">
-                                <span class="title">鹅蛋之旅</span>
-                            </div>
+                            <%for(var i=0;i<finAct.length;i++){%>
+                                 <div class="activity-item">
+                                    <img src="/images/img1.jpg" class="user-head">
+                                    <span class="span-title"><%=finAct[i].theme%></span>
+                                </div>
+                            <%}%>
                         </div>
                     </div>
                     <!-- 修改密码-->
                     <div class="change-password  info-act">
                         <ul class="ul-change-password fontS18">
-                            <li><label>原密码</label><input name="oldPassword" type="text" class="inputBase"></li>
-                            <li><label>新密码</label><input name="oldPassword" type="password" class="inputBase new-password"><span class="glyphicon glyphicon-eye-close marginL10 pointer see-password"></span></li>
+                            <li><label>原密码</label><input name="oldPassword" type="password" class="inputBase oldPassword"><span class="red fontS18 errOldPassword"></span></li>
+                            <li><label>新密码</label><input name="oldPassword" type="password" class="inputBase new-password"><span class="glyphicon glyphicon-eye-close marginL10 pointer see-password"></span><span class="red fontS18 errNewPassword"></span></li>
                         </ul>
                         <div class="btn btn-default btn-pass-submit">确认修改</div>
                     </div>

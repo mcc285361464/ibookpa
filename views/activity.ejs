@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>书趴网</title>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/activity.css">
+</head>
+<body>
+	<div class="body-content">
+		<% include header.ejs%>  
+		<div class="ie7-height100"></div>
+		<input type="hidden" id="session_user" value="<%if(session.user!=null){%><%=session.user.id%><%}%>">
+		<input type="hidden" id="person_id" value="<%= act.uid%>">
+		<input type="hidden" id="aId" value="<%= act.id%>">
+		<input type="hidden" id="applyCount" value="<%= act.applyCount%>">
+		<div class="div-activity">
+			<img src="/images/img1.jpg" class="img-head-pic">
+			<h2 class="invited-desc">邀约详情</h2>
+			<h3 class="activity-title"><%= act.theme%></h3>
+			 <ul class="ul-activity">
+                <li><span class="glyphicon glyphicon-user"></span><span class="marginL20"><%= act.nickname%></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/users/visit/<%= act.uid%>">更多资料</a></li>
+                <li><span class="glyphicon glyphicon-time"></span><span class="marginL20">发布日期</span>&nbsp;&nbsp;&nbsp;&nbsp;<span><%= act.createDate%></span></li>
+                <li><span class="glyphicon glyphicon-time"></span><span class="marginL20">结束日期</span>&nbsp;&nbsp;&nbsp;&nbsp;<span><%= act.finishDate%></span></li>
+                <li><span class="glyphicon glyphicon-map-marker"></span><span class="marginL20">约定地点</span>&nbsp;&nbsp;&nbsp;&nbsp;<span><%= act.address%></span></li>
+                <li><span class="glyphicon glyphicon-tag"></span><span class="marginL20"><%= act.remark%></span></li>
+                <li><span class="marginL20"><%= act.objectSex%></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><i class="fontS20 i-applyCount"><%= act.applyCount%></i></span><span>人报名</span></li>
+            </ul>
+            <ul class="ul-user-option">
+	            <li class="attentive"><span class="glyphicon glyphicon-star-empty"></span>&nbsp;<span class="span-attentive">
+	            	<%if(session.user != null){%>
+						<%for(var i=0;i<att.length;i++){%>
+							<%if(att[i].userId == session.user.id){%>
+								已关注
+								<%break;%>
+							<%}%>
+						<%}%>
+						<%if(i>att.length){%>
+							关注
+						<%}%>
+					<%}else{%>
+						关注
+					<%}%>
+	            </span></li>
+	            <li data-toggle="modal" data-target="#personal-message" class="personal-mes" id="personal-mes"><span class="glyphicon glyphicon-envelope"></span>&nbsp;<span>私信</span></li>
+	            <li id="li-apply-activity"><span class="glyphicon glyphicon-plus"></span>&nbsp;<span class="span-apply">
+	            	<%if(session.user != null){%>
+						<%for(var i=0;i<apply.length;i++){%>
+
+							<%if(apply[i].receiverId == session.user.id){%>
+								已报名
+								<%break;%>
+							<%}%>
+						<%}%>
+						<%if(i>apply.length || apply.length==0){%>报名
+						<%}%>
+					<%}else{%>
+						报名
+					<%}%>
+	            </span></li>
+	        </ul>
+
+	            <!-- Modal -->
+	            <div class="modal fade" id="personal-message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	              <div class="modal-dialog" role="document">
+	                <div class="modal-content">
+	                  <div class="modal-header">
+	                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                    <h4 class="modal-title" id="myModalLabel">私信</h4>
+	                  </div>
+	                  <div class="modal-body">
+	                    <textarea class="form-control textarea-personal" rows="3"></textarea>
+	                  </div>
+	                  <div class="modal-footer">
+	                  <button type="button" class="btn btn-default sub-message-btn">发送</button>
+	                  <button type="button" class="btn btn-default close-btn" data-dismiss="modal">取消</button>
+	                  </div>
+	                </div>
+	              </div>
+	            </div>
+	        <!--modal end-->
+			<div class="activity-comment">
+				<h3>所有人的评论(<span><%=mes.length%></span>)</h3>
+				<form action="/act-comment" method="post">
+					<input type="hidden" value="<%=act.id%>" name="actId">
+					<input type="hidden" value="<%=act.uid%>" name="uId">
+					<textarea name="comment" class="user-comment"></textarea>
+					<button class="comment-submit" type="submit">提交</button>
+				</form>
+				<div class="comments">
+					<%for(var i=0;i<mes.length;i++){%>
+						<div class="comment-item">
+							<img src="/images/img1.jpg" class="comment-user-head">
+							<span class="span-container"><%=mes[i].messageContent%></span>
+							<span class="time"><%=mes[i].date%></span>
+							<span class="name"><%=mes[i].nickname%></span>
+						</div>
+					<%}%>
+					<div class="marginT20"></div>
+				</div>
+
+			</div>
+			<div class="marginT20"></div>
+		</div>
+		
+		<% include footer.ejs%>
+
+	</div>
+	<script type="text/javascript" src="/javascripts/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="/javascripts/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/javascripts/activity.js"></script>
+</body>
+</html>

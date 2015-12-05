@@ -117,9 +117,11 @@ $(function(){
 	$('.change-password').delegate('.see-password','click',function(){
 		if($(this).hasClass('glyphicon glyphicon-eye-close')) {
 			$('.new-password').attr('type','text');
+			$('.oldPassword').attr('type','text');
 			$(this).removeClass('glyphicon glyphicon-eye-close').addClass('glyphicon glyphicon-eye-open');
 		}else {
 			$('.new-password').attr('type','password');
+			$('.oldPassword').attr('type','password');
 			$(this).removeClass('glyphicon glyphicon-eye-open').addClass('glyphicon glyphicon-eye-close');
 		}
 	});
@@ -181,4 +183,52 @@ $(function(){
 		$('.btn-close').click();
 	});
 
+	//删除好友
+	$('.friend-item').delegate('.del-btn','click',function(){
+		var uid = $(this).attr('data-id');
+		$.ajax({
+			type:'post',  
+		    url:'/users/del-friend',  
+		    data:{user_id:uid},  
+		    cache:false,  
+		    dataType:'json',  
+		    success:function(data){  
+		    	var className = '.f'+uid;
+		    	$(className).css('display','none');
+		    },  
+		    error:function(){}  
+		});
+	})
+	//修改密码
+	$('.change-password').delegate('.btn-pass-submit','click',function(){
+		var oldPassword = $('.oldPassword').val(),
+			newPassword = $('.new-password').val(),
+			errO = $('.errOldPassword'),
+			errN = $('.errNewPassword');
+
+		if(oldPassword == '') {
+			errO.html('原密码不能为空');
+		}else if(newPassword == '') {
+			errO.html('');
+			errN.html('新密码不能为空');
+		}else {
+			errO.html('');
+			errN.html('');
+			$.ajax({
+				type:'post',  
+			    url:'/users/changePassword',  
+			    data:{oldPassword:oldPassword,newPassword:newPassword},  
+			    cache:false,  
+			    dataType:'json',  
+			    success:function(data){  
+			    	if(data.msg == 'oldErr') {
+			    		errO.html('原密码错误');
+			    	}else {
+			    		window.location = '/users/login';
+			    	}
+			    },  
+			    error:function(){}  
+			});
+		}
+	});
 });

@@ -14,16 +14,31 @@
         <div class="body-content">
 
         <% include header.ejs%>      
-			
+			<input type="hidden" id="session_user" value="<%if(session.user!=null){%><%=session.user.id%><%}%>">
+			<input type="hidden" id="person_id" value="<%= user.id%>">
 			<div class="body-wrapper">
 				<div class="main">
 					<img src="/images/img1.jpg" class="user-picture">
 					<ul class="btn-group">
 						<li class="personal-message-btn">私信</li>
-						<li class="attentive">关注</li>
+						<li class="attentive">
+							<%if(session.user != null){%>
+								<%for(var i=0;i<attentived.length;i++){%>
+									<%if(attentived[i].userId == session.user.id){%>
+										已关注
+										<%break;%>
+									<%}%>
+								<%}%>
+								<%if(i>attentived){%>
+									关注
+								<%}%>
+							<%}else{%>
+								关注
+							<%}%>
+						</li>
 					</ul>
 					<div class="personal-message">
-						<textarea></textarea>
+						<textarea class="personal-message-textarea"></textarea>
 						<button type="button" class="btn btn-default btn-sub-per-mes">提交</button>
 					</div>
 					<ul class="user-info fontS18">
@@ -35,7 +50,7 @@
 					<ul class="sign-card fontS18">
 						<li>已发起<span class="fontS25"><%=publicCount%></span>&nbsp;个活动</li>
 						<li>参与过<span class="fontS25"><%=joinCount%></span>&nbsp;个活动</li>
-						<li>被<span class="fontS25"><%=attentived%></span>&nbsp;个人关注</li>
+						<li>被<span class="fontS25"><%=attentived.length%></span>&nbsp;个人关注</li>
 					</ul>
 				</div>
 			</div>

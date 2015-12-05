@@ -5,10 +5,9 @@
         <img src="/images/2wm_u24.png" class="wechat-code">
         <img src="/images/2wm_u24.png" class="weibo-code">
         <li><a href="/publish">发布活动</a></li>
-        <li><a href="javascript:void(0)">活动社区</a></li>
+        <li><a href="/">活动社区</a></li>
     </ul>
     <ul class="lo-re">
-        <%= session.user%>
         <%if(typeof(session.user) != 'undefined' && session.user != null) {%>
             <li><a href="/users/logout">退出</a></li>
             <li><a href="/users/personal"><%=session.user.nickname%></a></li>
@@ -23,7 +22,7 @@
     $(function(){
         var code = $('.wechat-code');
         var wcode = $('.weibo-code');
-
+        var logo = $('.logo');
         $('.header').delegate('.two-code','mouseover',function(){
             code.animate({'left':'280px'});
             code.animate({'top':'80px'});
@@ -35,6 +34,9 @@
             code.animate({'left':'-110px'});
             wcode.animate({'top':'0px'});
             wcode.animate({'right':'-110px'});
+        });
+        $('.logo').click(function(){
+            window.location = '/';
         });
     });
 </script>

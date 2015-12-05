@@ -5,9 +5,6 @@
 ol,ul {
 	list-style: none;
 }
-.ie7-height100 {
-	margin-top:100px;
-}
 .div-activity {
 	position: relative;
 	width: 1060px;
@@ -55,9 +52,10 @@ ol,ul {
 	float: left;
 	margin-left: 10px;
 	width: 90px;
+	cursor: pointer;
 }
 .div-activity .ul-user-option li:hover {
-	cursor: pointer;
+	color: #ccc;
 }
 .div-activity .activity-comment {
 	width: 900px;
@@ -84,6 +82,7 @@ ol,ul {
 	font-size: 25px;
 	color: #A29797;
 	cursor: pointer;
+	border:1px solid #ccc;
 }
 .activity-comment .comments {
 	width: 900px;

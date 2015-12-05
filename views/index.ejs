@@ -19,35 +19,40 @@
     </head>
     <body>
         <div class="body-content">
-
             <% include header.ejs%>      
             <div class="bg-turn">
                 <img src="/images/bg1.jpg" class="bg1"/>
                 <img src="/images/bg2.jpg" class="bg2"/>
                 <div class="pub-act">发&nbsp;布&nbsp;活&nbsp;动</div>
             </div>
+            <input type="hidden" id="session_user" value="<%if(session.user!=null){%><%= session.user.id%><%}%>">
             <div class="div-activity">
                 <div class="activity-content">
                         <% for(var i=0;i<acts.length;i++) {%>
                             <div class="activity-item">
-                                <a href="/users/visit/32"><img src="/images/img1.jpg" class="img-head"></a>
+                                <a href="/users/visit/<%= acts[i].uid%>"><img src="/images/img1.jpg" class="img-head"></a>
                                 <span class="activity-title"><%= acts[i].theme%></span>
                                 <ul class="ul-activity">
-                                    <li><span class="glyphicon glyphicon-user"></span><span class="marginL20">ccMa</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a>更多资料</a></li>
+                                    <li><span class="glyphicon glyphicon-user"></span><span class="marginL20"><%= acts[i].nickname%></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/users/visit/<%= acts[i].uid%>">更多资料</a></li>
                                     <li><span class="glyphicon glyphicon-time"></span><span class="marginL20">发布日期</span>&nbsp;&nbsp;&nbsp;&nbsp;<span><%= acts[i].createDate%></span></li>
                                     <li><span class="glyphicon glyphicon-time"></span><span class="marginL20">结束日期</span>&nbsp;&nbsp;&nbsp;&nbsp;<span><%= acts[i].finishDate%></span></li>
                                     <li><span class="glyphicon glyphicon-map-marker"></span><span class="marginL20">约定地点</span>&nbsp;&nbsp;&nbsp;&nbsp;<span><%= acts[i].address%></span></li>
                                     <li><span class="glyphicon glyphicon-tag"></span><span class="marginL20"><%= acts[i].remark%></span></li>
-                                    <li><span class="marginL20"><%= acts[i].objectSex%></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span><%= acts[i].applyCount%></span><span>人报名</span></li>
+                                    <li><span class="marginL20"><%= acts[i].objectSex%></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fontS20"><i><%= acts[i].applyCount%></i></span><span>人报名</span></li>
                                 </ul>
                                 <ul class="ul-user-option">
-                                    <li><span class="glyphicon glyphicon-star-empty"></span>&nbsp;<span>关注</span></li>
-                                    <li><span class="glyphicon glyphicon-edit"></span>&nbsp;<span>评论</span></li>
-                                    <li data-toggle="modal" data-target="#personal-message"><span class="glyphicon glyphicon-envelope"></span>&nbsp;<span>私信</span></li>
-                                    <li><span class="glyphicon glyphicon-plus"></span>&nbsp;<span>报名</span></li>
+                                <!--
+                                    <li class="user-attention"><span class="glyphicon glyphicon-star-empty"></span>&nbsp;<span>关注</span></li>
+                                -->
+                                    <li class="user-talk-about" data-id="<%=acts[i].id%>"><span class="glyphicon glyphicon-edit"></span>&nbsp;<span>评论</span></li>
+                                <!--
+                                    <li data-toggle="modal" data-target="#personal-message" class="user-personal-message"><span class="glyphicon glyphicon-envelope"></span>&nbsp;<span>私信</span></li>
+                                -->
+                                    <li class="user-apply"><span class="glyphicon glyphicon-plus"></span>&nbsp;<span>报名</span></li>
                                 </ul>
             
                                    <!-- Modal -->
+                                   <!--
                                     <div class="modal fade" id="personal-message" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                       <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -65,6 +70,7 @@
                                         </div>
                                       </div>
                                     </div>
+                                    -->
                             </div>
                             <!--activity item end-->
                         <%}%>

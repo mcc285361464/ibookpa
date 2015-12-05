@@ -107,6 +107,7 @@
 .friend-manage .friend-item {
 	font-size: 18px;
 	height: 70px;
+	position:relative;
 }
 .friend-manage .friend-item img{
 	height: 60px;
@@ -117,7 +118,9 @@
 	margin-left: 20px;
 }
 .friend-manage .friend-item .btn-danger {
-	margin-left: 180px;
+	position:absolute;
+	right:20px;
+	top:10px;
 }
 .info .my-activities {
 }
@@ -150,12 +153,12 @@
 	border-right: none;
 	padding: 10px 0 10px 20px;
 	height: 80px;
-	cursor: pointer;
 }
-.info .my-activities .activity-item .title {
+.info .my-activities .activity-item .span-title {
+	cursor: pointer;
 	margin-left: 20px
 }
-.info .my-activities .activity-item:hover .title{
+.info .my-activities .activity-item:hover .span-title{
 	color: #FCB686;
 }
 .info .my-activities {
