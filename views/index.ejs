@@ -23,9 +23,10 @@
             <div class="bg-turn">
                 <img src="/images/bg1.jpg" class="bg1"/>
                 <img src="/images/bg2.jpg" class="bg2"/>
-                <div class="pub-act">发&nbsp;布&nbsp;活&nbsp;动</div>
+                <div class="pub-act white">发&nbsp;布&nbsp;活&nbsp;动</div>
             </div>
             <input type="hidden" id="session_user" value="<%if(session.user!=null){%><%= session.user.id%><%}%>">
+            <input type="hidden" id="user_sex" value="<%if(session.user!=null){%><%= session.user.sex%><%}%>">
             <div class="div-activity">
                 <div class="activity-content">
                         <% for(var i=0;i<acts.length;i++) {%>
@@ -38,8 +39,24 @@
                                     <li><span class="glyphicon glyphicon-time"></span><span class="marginL20">结束日期</span>&nbsp;&nbsp;&nbsp;&nbsp;<span><%= acts[i].finishDate%></span></li>
                                     <li><span class="glyphicon glyphicon-map-marker"></span><span class="marginL20">约定地点</span>&nbsp;&nbsp;&nbsp;&nbsp;<span><%= acts[i].address%></span></li>
                                     <li><span class="glyphicon glyphicon-tag"></span><span class="marginL20"><%= acts[i].remark%></span></li>
-                                    <li><span class="marginL20"><%= acts[i].objectSex%></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fontS20"><i><%= acts[i].applyCount%></i></span><span>人报名</span></li>
+                                    <li><span class="marginL20"><%= acts[i].objectSex%></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fontS20"><i class="i-applyCount<%=acts[i].id%>"><%= acts[i].applyCount%></i></span><span>人报名</span></li>
                                 </ul>
+                                <input type="hidden" value="<%=acts[i].uid%>" class="user-id<%=acts[i].id%>">
+                                <div class="div-way"><span class="span-way"></span><span class="fontS20 green lineH40 center block">
+                                    <%if(acts[i].activityWay == '陪看书'){%>
+                                        陪看书
+                                    <%}else if(acts[i].activityWay == '去自习') {%>
+                                        去自习
+                                    <%}else if(acts[i].activityWay == '找书友') {%>
+                                        找书友
+                                    <%}else if(acts[i].activityWay == '换本书') {%>
+                                        换本书
+                                    <%}else if(acts[i].activityWay == '求教材') {%>
+                                        求教材
+                                    <%}else if(acts[i].activityWay == '求补课') {%>
+                                        求补课
+                                    <%}%>
+                                </span></div>
                                 <ul class="ul-user-option">
                                 <!--
                                     <li class="user-attention"><span class="glyphicon glyphicon-star-empty"></span>&nbsp;<span>关注</span></li>
@@ -48,7 +65,21 @@
                                 <!--
                                     <li data-toggle="modal" data-target="#personal-message" class="user-personal-message"><span class="glyphicon glyphicon-envelope"></span>&nbsp;<span>私信</span></li>
                                 -->
-                                    <li class="user-apply"><span class="glyphicon glyphicon-plus"></span>&nbsp;<span>报名</span></li>
+                                    <li class="user-apply" data-id="<%=acts[i].applyCount%>" data-act-id="<%=acts[i].id%>"><span class="glyphicon glyphicon-plus"></span>&nbsp;<span class="apply-state" id="apply-state<%=acts[i].id%>" data-sex="<%=acts[i].objectSex%>">
+                                        <%if(apply.length>0){ %>
+                                            <%for(var k=0;k<apply.length;k++) {%>
+                                                <%if(apply[k].userActivityId == acts[i].id){%>
+                                                    已报名
+                                                    <%break;%>
+                                                <%}%>
+                                            <%}%>
+                                            <%if(k>=apply.length) {%>
+                                                报名
+                                            <%}%>
+                                        <%} else {%>
+                                           报名
+                                        <%}%>
+                                    </span></li>
                                 </ul>
             
                                    <!-- Modal -->

@@ -29,7 +29,12 @@ router.post('/users/doLogin', function (req, res, next) {
 	  		res.render('login',{'error':'用户名或密码错误'});
 	  	}else {
 	  		sess.user = results[0];
-	  		res.redirect('/');
+	  		var user = sess.user;
+	  		if(user.nickname == null || user.nickname == '') {
+	  			res.redirect('/users/personal');
+	  		}else {
+		  		res.redirect('/');
+			}
 	  	}	
 	  }
   });
@@ -69,8 +74,11 @@ router.post('/users/doRegister', function (req, res, next) {
 /*跳到个人中心*/
 router.get('/personal', function (req, res, next) {
 	var sess = req.session,
-		user = sess.user,
-		username = user.username,
+		user = sess.user;
+	if(user == undefined || user == '' || user == null) {
+		res.redirect('/users/login');
+	}
+	var	username = user.username,
 		oDate = new Date(), //时间对象
 		dateT = Math.round(new Date().getTime()/1000);
 	async.waterfall([  
@@ -102,8 +110,12 @@ router.get('/personal', function (req, res, next) {
 	    	conn.query('select ua.id,ua.theme from t_useractivity ua,t_betweenuseractivity bua where (bua.receiverId=? and bua.userActivityId=ua.id and ua.activityDateSign<?) or (ua.launcherId=? and ua.activityDateSign<?);',[data.id,dateT,data.id,dateT],function(err,results){
 				callback(err,data,data2,data3,data4,data5,data6,results);
 			});
+	    },function(data,data2,data3,data4,data5,data6,data7,callback) {
+	    	conn.query('select ua.id,ua.theme from t_useractivity ua,t_betweenuseractivity bua where (bua.receiverId=? and bua.userActivityId=ua.id and ua.activityDateSign<?) or (ua.launcherId=? and ua.activityDateSign<?);',[data.id,dateT,data.id,dateT],function(err,results){
+				callback(err,data,data2,data3,data4,data5,data6,data7,results);
+			});
 	    }
-    ], function (err,user,provinces,mes,friends,selfAct,applyAct,finAct) {  
+    ], function (err,user,provinces,mes,friends,selfAct,applyAct,finAct,applyMan) {  
     	if(err) {
     		console.log(err);
     	}else {
@@ -298,6 +310,60 @@ router.post('/changePassword' , function (req, res, next) {
 	});
 });
 
+router.post('/manageAct' , function (req, res, next) {
+	var aId = req.body.aId,
+		sess = req.session,
+		user = sess.user,
+		data = '',
+		sId = user.id;
+	conn.query('select u.id,u.nickname,u.headPictureUrl,u.username from t_users u where id in (select receiverId from t_betweenuseractivity bua where bua.userId=? and bua.userActivityId = ? and bua.isPass != 1);',[sId,aId],function(err,results){
+		if(err) {
+			console.log(err);
+		}else {
+			for(var i=0;i<results.length;i++) {
+				data += [
+					'<div class="row">',
+	                   '<div class="col-md-1"><img src="/images/img1.jpg" class="img-head"></div>',
+	                   '<div class="col-md-3">'+results[i].nickname+'</div>',
+	                   '<div class="col-md-3 col-md-offset-1 none tel'+results[i].id+'">'+results[i].username+'</div>',
+	                   '<span class="btn col-md-offset-6 btn-success pass pass'+results[i].id+'" data-id='+results[i].id+'>通过</span>',
+	               '</div>',
+	            ].join('');
+			}
+			conn.query('select u.id,u.nickname,u.headPictureUrl,u.username from t_users u where id in (select receiverId from t_betweenuseractivity bua where bua.userId=? and bua.userActivityId = ? and bua.isPass = 1);',[sId,aId],function(err,results){
+				if(err) {
+					console.log(err);
+				} else {
+					for(var i=0;i<results.length;i++) {
+						data += [
+							'<div class="row">',
+			                   '<div class="col-md-1"><img src="/images/img1.jpg" class="img-head"></div>',
+			                   '<div class="col-md-3">'+results[i].nickname+'</div>',
+			                   '<div class="col-md-6 col-md-offset-1 tel'+results[i].id+'"><span class="fontS18 green">已通过，电话：</span>'+results[i].username+'</div>',
+			               	'</div>',
+			            ].join('');
+					}	
+					res.json({'state':200,'msg':data});
+				}
+			});
+		}
+	});
+});
+
+router.post('/passAct', function(req, res, next){
+	var uId = req.body.user_id,
+		aId = req.body.aId;
+	conn.query('update t_betweenuseractivity set isPass=1 where userActivityId=? and receiverId=?',[aId,uId],function(err,results){
+		if(err) {
+			console.log(err);
+		}else {
+			console.log(uId+'--'+aId);
+			res.json({'state':200});
+		}
+	});
+});
+
+//通过时间戳--->时间
 function getDate(nS) {     
    return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');     
 }     

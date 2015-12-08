@@ -149,13 +149,14 @@
 	border-radius: 30px;
 }
 .info .my-activities .activity-item {
+	position: relative;
 	border: 1px solid #ccc;
 	border-right: none;
 	padding: 10px 0 10px 20px;
 	height: 80px;
+	cursor: pointer;
 }
 .info .my-activities .activity-item .span-title {
-	cursor: pointer;
 	margin-left: 20px
 }
 .info .my-activities .activity-item:hover .span-title{
@@ -198,3 +199,8 @@
 .province-schools .schools-wrapper .school-item:hover {
 	background: #D0A5F6;
 } 
+.self-activity .manage-apply {
+	position: absolute;
+	right: 20px;
+	top: 25px;
+}

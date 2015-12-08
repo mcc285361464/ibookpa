@@ -77,7 +77,6 @@
                           </div>
                           <div class="modal-body province-schools">
                                 <ul class="schools-wrapper fontS18">
-
                                 </ul>
                           </div>
                           <div class="modal-footer">
@@ -127,16 +126,35 @@
                             <%for(var i=0;i<selfAct.length;i++){%>
                                 <div class="activity-item">
                                     <img src="/images/img1.jpg" class="user-head">
-                                    <span class="span-title"><%=selfAct[i].theme%></span>
+                                    <span class="span-title"><a href="/comment/<%=selfAct[i].id%>"><%=selfAct[i].theme%></a></span>
+                                    <span class="btn btn-info manage-apply" data-toggle="modal" data-target="#manage_apply<%=selfAct[i].id%>" data-id="<%=selfAct[i].id%>">管理报名</span>
+                                </div>
+                                <!--apply modal-->
+                                <div class="modal fade" id="manage_apply<%=selfAct[i].id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document" style="width:800px;">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h2 class="modal-title" id="myModalLabel">管理报名</h2>
+                                            </div>
+                                            <div class="modal-body" data-id="<%=selfAct[i].id%>">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             <%}%>
                         </div>
+                        
+
 
                         <div class="join-activity activity">
                             <%for(var i=0;i<applyAct.length;i++){%>
                                 <div class="activity-item">
                                     <img src="/images/img1.jpg" class="user-head">
-                                    <span class="span-title"><%=applyAct[i].theme%></span>
+                                    <span class="span-title"><a href="/comment/<%=applyAct[i].id%>"><%=applyAct[i].theme%></a></span>
                                 </div>
                             <%}%>
                         </div>
@@ -144,7 +162,7 @@
                             <%for(var i=0;i<finAct.length;i++){%>
                                  <div class="activity-item">
                                     <img src="/images/img1.jpg" class="user-head">
-                                    <span class="span-title"><%=finAct[i].theme%></span>
+                                    <span class="span-title"><a href="/comment/<%=finAct[i].id%>"><%=finAct[i].theme%></a></span>
                                 </div>
                             <%}%>
                         </div>

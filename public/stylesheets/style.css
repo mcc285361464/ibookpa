@@ -35,6 +35,21 @@ ul,ol {
 .red {
 	color:red;
 }
+.white {
+	color: white;
+}
+.center {
+	text-align: center;
+}
+.pink {
+	color: pink;
+}
+.block {
+	display: block;
+}
+.lineH40{
+	line-height: 40px;
+}
 .fontS14 {
 	font-size: 14px;
 }
@@ -120,13 +135,17 @@ ul,ol {
 .header .lo-re {
 	position:absolute;
 	overflow: hidden;
-	right:230px;
+	right:150px;
 	font-size: 26px;
 	line-height: 80px
 }
 .header .lo-re li{
 	float:right;
 	margin-left: 40px;
+}
+.header .lo-re li a:hover{
+	color:#F40C0C;
+	text-decoration: none;
 }
 .bg-turn {
 	position:relative;
@@ -164,6 +183,31 @@ ul,ol {
 	height: auto;
 	width:1010px;
 	margin: 0 auto;
+}
+
+.div-way {
+	position: absolute;	
+	width: 130px;
+	height: 40px;
+	right: 30px;
+	top: 20px;
+	background: #ccc;
+}
+
+.span-way {
+	display: block;
+	float:left;
+	height: 40px;
+	width: 10px;
+	background: #817B7B;
+}
+
+.img-head {
+	height: 40px;	
+	width: 40px;
+	border-radius: 25px;
+	margin-top: -7px;
+	margin-bottom: 13px;
 }
 
 .div-activity .activity-content .activity-item {
@@ -255,14 +299,13 @@ ul,ol {
 }
 .activity-content .activity-item .ul-user-option {
 	position:absolute;
-	right:20px;
+	right:40px;
 	bottom:0px;
 	font-size: 18px;
 }
 .activity-content .activity-item .ul-user-option li {
 	float: left;
 	height: 30px;
-	width: 65px;
 	margin-left:20px;
 	cursor: pointer;
 }

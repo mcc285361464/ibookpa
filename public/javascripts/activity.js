@@ -63,30 +63,35 @@ $(function(){
 		}else {
 			url = '/cancel-act';
 		}
-
-		$.ajax({
-			type:'post',  
-			url:url,  
-		    data:{user_id:user_id,aId:aId,applyCount:applyCount},  
-		    cache:false,  
-		    dataType:'json',  
-		    success:function(data){  
-		    	if(data.msg == 'add') {
-		    		$('.span-apply').html('已报名');
-		    		var num = $('.i-applyCount').text();
-		    		num ++
-		    		$('.i-applyCount').html(num);
-		    	}else {
-		    		$('.span-apply').html('报名');
-		    		var num = $('.i-applyCount').text();
-		    		if(num > 0) {
-		    			num --
-		    		}
-		    		$('.i-applyCount').html(num);
-		    	}
-		    },  
-		    error:function(){}  
-		});
+		var act_sex = $('#act_sex').val().trim(),
+			user_sex = $('#user_sex').val().trim();
+		if(act_sex == '不限' || act_sex == user_sex) {
+			$.ajax({
+				type:'post',  
+				url:url,  
+			    data:{user_id:user_id,aId:aId,applyCount:applyCount},  
+			    cache:false,  
+			    dataType:'json',  
+			    success:function(data){  
+			    	if(data.msg == 'add') {
+			    		$('.span-apply').html('已报名');
+			    		var num = $('.i-applyCount').text();
+			    		num ++
+			    		$('.i-applyCount').html(num);
+			    	}else {
+			    		$('.span-apply').html('报名');
+			    		var num = $('.i-applyCount').text();
+			    		if(num > 0) {
+			    			num --
+			    		}
+			    		$('.i-applyCount').html(num);
+			    	}
+			    },  
+			    error:function(){}  
+			});
+		}else if(user != '' && act_sex != user_sex && act_sex != '不限') {
+			alert('与活动性别要求不符');
+		}
 	});
 
 

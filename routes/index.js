@@ -6,21 +6,29 @@ var async = require('async');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	var nowDateT = Math.round(new Date().getTime()/1000);
-	var friends = new Array();
-	var sess = req.session;
-	var user = sess.user;
+	var nowDateT = Math.round(new Date().getTime()/1000),
+		friends = new Array(),
+		sess = req.session,
+		user = sess.user,
+		userId = null;
+	if(user!= undefined) {
+		userId = user.id;
+	}
 	async.waterfall([  
 	    function(callback){
 		    conn.query('select u.id uid,u.nickname,ua.id,ua.theme,ua.activityWay,ua.address,ua.applyCount,ua.createDate,ua.finishDate,ua.objectSex,ua.remark from t_users u,t_useractivity ua where activityDateSign>? and ua.launcherId=u.id;',[nowDateT],function(err,results){
 				callback(err, results);  
 			});
+	    },function(data,callback){
+	    	conn.query('select bua.id,bua.receiverId,bua.userActivityId,bua.userId from t_betweenuseractivity bua,t_useractivity ua where ua.id=bua.userActivityId and ua.activityDateSign>? and bua.receiverId=?;',[nowDateT,userId],function(err,results){
+				callback(err, data, results);
+			});
 	    }
-    ], function (err,activitys) {  
+    ], function (err,activitys,apply) {  
     	if(err) {
     		console.log(err);
     	}else {
-			res.render('index',{acts:activitys});
+			res.render('index',{acts:activitys, apply:apply});
     	}
     });  
 
@@ -135,7 +143,6 @@ router.post('/publishActivity',function(req,res,next) {
 //跳到评论页面
 router.get('/comment/:aid',function(req, res, next) {
 	var aid = req.params.aid;
-
 	async.waterfall([  
 	    function(callback){
 		    conn.query('select u.id uid,u.nickname,ua.id,ua.theme,ua.activityWay,ua.address,ua.applyCount,ua.createDate,ua.finishDate,ua.objectSex,ua.remark from t_users u,t_useractivity ua where ua.id=? and ua.launcherId=u.id;',[aid],function(err,results){
@@ -153,8 +160,6 @@ router.get('/comment/:aid',function(req, res, next) {
 	    	conn.query('select * from t_betweenuseractivity where userActivityId=? and userId=?',[aid,data.uid],function(err,results){
 	    		callback(err,data,data2,data3,results);
 	    	});
-	    },function() {
-	    	
 	    }
     ], function (err,activity,messages,attentive,apply) {  
     	if(err) {
@@ -207,7 +212,6 @@ router.post('/apply-act',function(req, res, next) {
 					if(err) {
 						console.log(err);
 					}else {
-						console.log(applyCount);
 						conn.query('update t_useractivity set applyCount=? where id = ?',[applyCount,aId],function(err,results){
 							if(err) {
 								console.log(err);

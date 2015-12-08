@@ -14,6 +14,8 @@
 		<input type="hidden" id="person_id" value="<%= act.uid%>">
 		<input type="hidden" id="aId" value="<%= act.id%>">
 		<input type="hidden" id="applyCount" value="<%= act.applyCount%>">
+		<input type="hidden" id="act_sex" value="<%= act.objectSex%>">
+		<input type="hidden" id="user_sex" value="<%if(session.user!=null){%><%=session.user.sex%><%}%>">
 		<div class="div-activity">
 			<img src="/images/img1.jpg" class="img-head-pic">
 			<h2 class="invited-desc">邀约详情</h2>
@@ -35,7 +37,7 @@
 								<%break;%>
 							<%}%>
 						<%}%>
-						<%if(i>att.length){%>
+						<%if(i>=att.length){%>
 							关注
 						<%}%>
 					<%}else{%>

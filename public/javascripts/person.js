@@ -44,8 +44,11 @@ $(function(){
 		日期插件
 	*/
 	$( "#birth" ).datepicker({
+		dateFormat: 'yy-mm-dd',
 		changeMonth: true,
-		changeYear: true
+		changeYear: true,
+		defaultDate: '1996-06-15'
+
 	});
 	/*
 		划过显示向右小箭头
@@ -230,5 +233,45 @@ $(function(){
 			    error:function(){}  
 			});
 		}
+	});
+
+	//管理报名
+	$('.self-activity').delegate('.manage-apply','click',function(){
+		var aId = $(this).attr('data-id'),
+			idName = 'manage_apply'+aId,
+			_idName = '#'+idName+' '+'.modal-body';
+		$.ajax({
+			type:'post',  
+		    url:'/users/manageAct',  
+		    data:{aId:aId},  
+		    cache:false,  
+		    dataType:'json',  
+		    success:function(data){  
+		    	$(_idName).html('');
+		    	$(_idName).html(data.msg);
+		    },  
+		    error:function(){}  
+		});
+	});
+
+	//通过
+	$('.self-activity').delegate('.pass','click',function(){
+		var user_id = $(this).attr('data-id'),
+			name = '.pass'+user_id,
+			showName = '.tel'+user_id,
+			aId = $(this).closest('.modal-body').attr('data-id');
+		$.ajax({
+			type:'post',  
+		    url:'/users/passAct',  
+		    data:{user_id:user_id,aId:aId},  
+		    cache:false,  
+		    dataType:'json',  
+		    success:function(data){  
+		    	$(showName).css('display','block');
+				$(name).css('display','none');
+		    },  
+		    error:function(){}  
+		});
+		
 	});
 });
