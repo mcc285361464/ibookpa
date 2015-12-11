@@ -31,7 +31,7 @@
                 <div class="activity-content">
                         <% for(var i=0;i<acts.length;i++) {%>
                             <div class="activity-item">
-                                <a href="/users/visit/<%= acts[i].uid%>"><img src="/images/img1.jpg" class="img-head"></a>
+                                <a href="/users/visit/<%= acts[i].uid%>"><img src="<%= acts[i].headPictureUrl%>" class="img-head"></a>
                                 <span class="activity-title"><%= acts[i].theme%></span>
                                 <ul class="ul-activity">
                                     <li><span class="glyphicon glyphicon-user"></span><span class="marginL20"><%= acts[i].nickname%></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/users/visit/<%= acts[i].uid%>">更多资料</a></li>

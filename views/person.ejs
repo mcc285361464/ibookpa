@@ -13,8 +13,11 @@
         <% include header.ejs%>
 
 		<div class="height80"></div>
-		<img src="/images/img1.jpg" class="user-pic">
-
+		<img src="<%=session.user.headPictureUrl%>" class="user-pic">
+        <span class="head-hover fontS18">更换头像</span>
+        <form action="/users/uploadHeadPic" enctype='multipart/form-data' method="post" class="form-head">
+            <input type='file' class="input-head" style="display: none;" name="inputHead">
+        </form>
 		<div class="main-content">
 			<ul class="ul-tags">
                 <li class="tag-title">个人中心</li>
@@ -106,7 +109,7 @@
                     <div class="friend-manage  info-act">
                         <%for(var i=0;i<friends.length;i++){%>
                             <div class="friend-item f<%=friends[i].id%>">
-                                <img src="/images/img1.jpg">
+                                <a href="/users/visit/<%= friends[i].id%>"><img src="<%=friends[i].headPictureUrl%>"></a>
                                 <span><%=friends[i].nickname%></span>
                                 <span><%=friends[i].school%></span>
                                 <span><%=friends[i].sex%></span>
@@ -125,7 +128,7 @@
                         <div class="self-activity activity">
                             <%for(var i=0;i<selfAct.length;i++){%>
                                 <div class="activity-item">
-                                    <img src="/images/img1.jpg" class="user-head">
+                                    <a href="/users/visit/<%= selfAct[i].uId%>"><img src="<%=selfAct[i].headPictureUrl%>" class="user-head"></a>
                                     <span class="span-title"><a href="/comment/<%=selfAct[i].id%>"><%=selfAct[i].theme%></a></span>
                                     <span class="btn btn-info manage-apply" data-toggle="modal" data-target="#manage_apply<%=selfAct[i].id%>" data-id="<%=selfAct[i].id%>">管理报名</span>
                                 </div>
@@ -153,15 +156,18 @@
                         <div class="join-activity activity">
                             <%for(var i=0;i<applyAct.length;i++){%>
                                 <div class="activity-item">
-                                    <img src="/images/img1.jpg" class="user-head">
+                                    <a href="/users/visit/<%= applyAct[i].uId%>"><img src="<%=applyAct[i].headPictureUrl%>" class="user-head"></a>
                                     <span class="span-title"><a href="/comment/<%=applyAct[i].id%>"><%=applyAct[i].theme%></a></span>
+                                    <%if(applyAct[i].isPass == 1){%>
+                                        <span class="passInfo fontS18 green">已通过，电话：15111111111</span>
+                                    <%}%>
                                 </div>
                             <%}%>
                         </div>
                         <div class="end-activity activity">
                             <%for(var i=0;i<finAct.length;i++){%>
                                  <div class="activity-item">
-                                    <img src="/images/img1.jpg" class="user-head">
+                                    <a href="/users/visit/<%= finAct[i].uId%>"><img src="<%=finAct[i].headPictureUrl%>" class="user-head"></a>
                                     <span class="span-title"><a href="/comment/<%=finAct[i].id%>"><%=finAct[i].theme%></a></span>
                                 </div>
                             <%}%>

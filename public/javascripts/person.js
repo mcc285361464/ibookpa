@@ -57,6 +57,30 @@ $(function(){
 		$('.main-content .tag-sign').removeClass('glyphicon glyphicon-circle-arrow-right');
 		$(this).find('span').addClass('glyphicon glyphicon-circle-arrow-right');
 	});
+
+	/*
+		更换头像
+	*/
+	$('.user-pic').mouseover(function(){
+		$('.head-hover').css('display','block');
+	});
+	$('.user-pic').mouseout(function(){
+		$('.head-hover').css('display','none');
+	});
+	$('.head-hover').mouseover(function(){
+		$('.head-hover').css('display','block');
+	})
+	$('.user-pic').click(function(){
+		$('.input-head').click();
+	})
+	$('.head-hover').click(function(){
+		$('.input-head').click();
+	})
+	$('.input-head').change(function(){
+		$('.form-head').submit();
+	})
+
+
 	/*
 		点击左侧显示相应选项卡
 	*/

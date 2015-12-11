@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 	}
 	async.waterfall([  
 	    function(callback){
-		    conn.query('select u.id uid,u.nickname,ua.id,ua.theme,ua.activityWay,ua.address,ua.applyCount,ua.createDate,ua.finishDate,ua.objectSex,ua.remark from t_users u,t_useractivity ua where activityDateSign>? and ua.launcherId=u.id;',[nowDateT],function(err,results){
+		    conn.query('select u.headPictureUrl,u.id uid,u.nickname,ua.id,ua.theme,ua.activityWay,ua.address,ua.applyCount,ua.createDate,ua.finishDate,ua.objectSex,ua.remark from t_users u,t_useractivity ua where activityDateSign>? and ua.launcherId=u.id;',[nowDateT],function(err,results){
 				callback(err, results);  
 			});
 	    },function(data,callback){

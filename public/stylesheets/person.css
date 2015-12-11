@@ -1,14 +1,31 @@
 .height80 {
 	height: 100px;
 }
-.body-content .user-pic{
+.body-content .user-pic {
 	display: block;
 	height: 100px;
 	width: 100px;
 	margin-bottom: 20px;
 	border-radius: 50px;
 	margin: 0 auto;
+	cursor: pointer;
 }
+.body-content .head-hover {
+	display: none;
+	position: absolute;
+	height: 50px;
+	width: 100px;
+	border-radius: 0 0 50px 50px;
+	background-color:#000000;/* IE6和部分IE7内核的浏览器(如QQ浏览器)下颜色被覆盖 */
+	background-color:rgba(0,0,0,0.2); /* IE6和部分IE7内核的浏览器(如QQ浏览器)会读懂，但解析为透明 */
+	color: #fff;
+	cursor: pointer;	
+	top: 150px;
+	left: 625px;
+	text-align: center;
+	line-height: 50px;
+}
+
 .body-content .main-content {
 	width: 1006px;
 	border: 1px solid #ccc;
@@ -53,6 +70,10 @@
 }
 .main-content .right-block .info {
 	padding: 20px 0 0 70px;
+}
+.main-content .info-act {
+	max-height: 500px;
+	overflow: auto;
 }
 .main-content .right-block .info .basic-info {
 }
@@ -154,9 +175,9 @@
 	border-right: none;
 	padding: 10px 0 10px 20px;
 	height: 80px;
-	cursor: pointer;
 }
 .info .my-activities .activity-item .span-title {
+	cursor: pointer;
 	margin-left: 20px
 }
 .info .my-activities .activity-item:hover .span-title{
@@ -164,6 +185,11 @@
 }
 .info .my-activities {
 	display: none;
+}
+.info .my-activities .activity-item .passInfo {
+	position: absolute;
+	right: 40px;
+	top: 25px;	
 }
 .info .my-activities .join-activity {
 	display: none;

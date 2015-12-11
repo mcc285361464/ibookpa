@@ -27,20 +27,35 @@
         var code = $('.wechat-code');
         var wcode = $('.weibo-code');
         var logo = $('.logo');
+    /*
         $('.header').delegate('.two-code','mouseover',function(){
-            code.animate({'left':'280px'});
-            code.animate({'top':'80px'});
-            wcode.animate({'right':'840px'});
-            wcode.animate({'top':'80px'});
+            code.filter(':not(:animated)').animate({'left':'280px'}).animate({'top':'80px'});
+            wcode.filter(':not(:animated)').animate({'right':'840px'}).animate({'top':'80px'});
         });
         $('.header').delegate('.two-code','mouseout',function(){
-            code.animate({'top':'0px'});
-            code.animate({'left':'-110px'});
-            wcode.animate({'top':'0px'});
-            wcode.animate({'right':'-110px'});
+            code.animate({'top':'0px'}).animate({'left':'-110px'});
+            wcode.animate({'top':'0px'}).animate({'right':'-110px'});
         });
+    */
         $('.logo').click(function(){
             window.location = '/';
         });
+
+        $('.header').hover(
+            function(){
+                t = setTimeout(function(){
+                    code.filter(':not(:animated)').animate({'left':'280px'}).animate({'top':'80px'});
+                    wcode.filter(':not(:animated)').animate({'right':'840px'}).animate({'top':'80px'});
+                },
+                200);
+            },
+            function(){
+                //clearTimeout(t);   
+                code.animate({'top':'0px'}).animate({'left':'-110px'});
+                wcode.animate({'top':'0px'}).animate({'right':'-110px'});
+            }
+        );
+
+        
     });
 </script>

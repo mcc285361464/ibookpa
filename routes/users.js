@@ -3,7 +3,9 @@ var router = express.Router();
 var conn = require('../utils/mysql');
 var md5 = require('md5');
 var session = require('express-session');
-var async = require('async')
+var async = require('async');
+var multiparty = require('multiparty');
+var fs = require('fs');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -95,19 +97,19 @@ router.get('/personal', function (req, res, next) {
 				callback(err,data,data2,results);
 			});
 	    },function(data,data2,data3,callback) {
-	    	conn.query('select u.nickname nickname,u.id,u.sex,u.school from t_users u,t_friends f where u.id=f.friendId and userId=?',[data.id],function(err,results){
+	    	conn.query('select u.nickname nickname,u.id,u.sex,u.school,u.headPictureUrl from t_users u,t_friends f where u.id=f.friendId and userId=?',[data.id],function(err,results){
 				callback(err,data,data2,data3,results);
 			});
 	    },function(data,data2,data3,data4,callback) {
-	    	conn.query('select id,theme from t_useractivity where launcherId=?',[data.id],function(err,results){
+	    	conn.query('select ua.id,ua.theme,u.headPictureUrl,u.id uId from t_useractivity ua,t_users u where ua.launcherId=? and activityDateSign>? and u.id=?',[data.id,dateT,data.id],function(err,results){
 				callback(err,data,data2,data3,data4,results);
 			});
 	    },function(data,data2,data3,data4,data5,callback) {
-	    	conn.query('select ua.id,ua.theme from t_useractivity ua,t_betweenuseractivity bua where bua.receiverId=? and bua.userActivityId=ua.id',[data.id],function(err,results){
+	    	conn.query('select bua.isPass,u.username,u.id uId,u.headPictureUrl,ua.id,ua.theme from t_users u,t_useractivity ua,t_betweenuseractivity bua where bua.receiverId=? and bua.userActivityId=ua.id and ua.activityDateSign>? and ua.launcherId=u.id',[data.id,dateT],function(err,results){
 				callback(err,data,data2,data3,data4,data5,results);
 			});
 	    },function(data,data2,data3,data4,data5,data6,callback) {
-	    	conn.query('select ua.id,ua.theme from t_useractivity ua,t_betweenuseractivity bua where (bua.receiverId=? and bua.userActivityId=ua.id and ua.activityDateSign<?) or (ua.launcherId=? and ua.activityDateSign<?);',[data.id,dateT,data.id,dateT],function(err,results){
+	    	conn.query('select u.id uId,u.headPictureUrl,ua.id,ua.theme from t_useractivity ua,t_betweenuseractivity bua,t_users u where (bua.receiverId=? and bua.userActivityId=ua.id and ua.activityDateSign<? and u.id=ua.launcherId) or (ua.launcherId=? and ua.activityDateSign<? and u.id=ua.launcherId) group by ua.id;',[data.id,dateT,data.id,dateT],function(err,results){
 				callback(err,data,data2,data3,data4,data5,data6,results);
 			});
 	    },function(data,data2,data3,data4,data5,data6,data7,callback) {
@@ -186,7 +188,7 @@ router.get('/visit/:user_id' , function (req, res, next) {
 	var attentived = null;
 	async.waterfall([  
 	    function(callback){
-	    	conn.query('select id,nickname,sex,school,signature from t_users where id=?',[user_id],function(err,results){
+	    	conn.query('select id,nickname,sex,school,signature,headPictureUrl from t_users where id=?',[user_id],function(err,results){
 				callback(err, results[0]);  
 			});
 	    },
@@ -323,7 +325,7 @@ router.post('/manageAct' , function (req, res, next) {
 			for(var i=0;i<results.length;i++) {
 				data += [
 					'<div class="row">',
-	                   '<div class="col-md-1"><img src="/images/img1.jpg" class="img-head"></div>',
+	                   '<div class="col-md-1"><a href="/users/visit/'+results[i].id+'"><img src="'+results[i].headPictureUrl+'" class="img-head"></a></div>',
 	                   '<div class="col-md-3">'+results[i].nickname+'</div>',
 	                   '<div class="col-md-3 col-md-offset-1 none tel'+results[i].id+'">'+results[i].username+'</div>',
 	                   '<span class="btn col-md-offset-6 btn-success pass pass'+results[i].id+'" data-id='+results[i].id+'>通过</span>',
@@ -337,7 +339,7 @@ router.post('/manageAct' , function (req, res, next) {
 					for(var i=0;i<results.length;i++) {
 						data += [
 							'<div class="row">',
-			                   '<div class="col-md-1"><img src="/images/img1.jpg" class="img-head"></div>',
+			                   '<div class="col-md-1"><a href="/users/visit/'+results[i].id+'"><img src="'+results[i].headPictureUrl+'" class="img-head"></a></div>',
 			                   '<div class="col-md-3">'+results[i].nickname+'</div>',
 			                   '<div class="col-md-6 col-md-offset-1 tel'+results[i].id+'"><span class="fontS18 green">已通过，电话：</span>'+results[i].username+'</div>',
 			               	'</div>',
@@ -359,6 +361,55 @@ router.post('/passAct', function(req, res, next){
 		}else {
 			console.log(uId+'--'+aId);
 			res.json({'state':200});
+		}
+	});
+});
+
+//上传图片
+router.post('/uploadHeadPic', function(req, res, next) {
+    //生成multiparty对象，并配置上传目标路径
+   var form = new multiparty.Form({uploadDir: './public/headPics/'});
+   var sess = req.session,
+   	   user = sess.user,
+   	   uId = user.id;
+   //上传完成后处理
+	form.parse(req, function(err, fields, files) {
+		var filesTmp = JSON.stringify(files,null,2);
+		if(err){
+		  console.log('parse error: ' + err);
+		} else {
+		  var inputFile = files.inputHead[0];
+		  var uploadedPath = inputFile.path;
+		  var dstPath = uploadedPath.substr(6);
+		  conn.query('update t_users set headPictureUrl=? where id=?',[dstPath,uId],function(){
+		  	if(err) {
+		  		console.log(err);
+		  	}else {
+		  		user.headPictureUrl = dstPath;
+		  		res.redirect('/users/personal');
+		  	}
+		  });
+ /*
+		  var dstName = 'ibookpa_';
+		  for(var i=0;i<6;i++) {
+		  	dstName += Math.floor(Math.random()*10);
+		  }
+		  var dstPath = './public/headPics/' + inputFile.originalFilename;
+		  */
+	//	  var dstPath = '/headPics/'+dstName+".png";
+		  //重命名为真实文件名
+		  /*
+		  fs.rename(uploadedPath, dstPath, function(err) {
+		    if(err){
+		      console.log('rename error: ' + err);
+		    } else {
+		      console.log(uploadedPath);
+		      console.log(dstPath);
+		      console.log('rename ok');
+		    }
+		  });
+  */
+
 		}
 	});
 });
