@@ -59,6 +59,11 @@ body {
 	margin-top:50px;
 	font-size: 25px
 }
+.div-content .right .change-success {
+	position: absolute;
+	color: green;
+	font-size: 18px;
+}
 .div-content .right .welcome-register {
 	width:340px;
 	display: block;

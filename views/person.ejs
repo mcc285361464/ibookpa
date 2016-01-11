@@ -13,8 +13,12 @@
         <% include header.ejs%>
 
 		<div class="height80"></div>
-		<img src="<%=session.user.headPictureUrl%>" class="user-pic">
-        <span class="head-hover fontS18">更换头像</span>
+        <%if(session.user.headPictureUrl != '/images/default.png'){%>
+    		<img src="<%=session.user.headPictureUrl%>" class="user-pic">
+            <span class="head-hover fontS18">更换头像</span>
+        <%}else {%>
+            <img src="/images/default.gif" class="user-pic">
+        <%}%>
         <form action="/users/uploadHeadPic" enctype='multipart/form-data' method="post" class="form-head">
             <input type='file' class="input-head" style="display: none;" name="inputHead">
         </form>

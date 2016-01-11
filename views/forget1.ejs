@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ibookpa</title>   
+        <!--你自己的样式文件 -->
+        <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
+        <link href="/stylesheets/style.css" rel="stylesheet" />    
+        <link href="/stylesheets/forget.css" rel="stylesheet" />    
+    </head>
+    <body>
+        <div class="body-content">
+            <div class="main-content">
+                <div class="main-content-wrapper">
+                    <h1>书趴网</h1>
+                    <input type="hidden" name="username" value="<%=username%>">
+                    <form action="/users/changePasswordFinally" method="post" class="forget-form">
+                        <ul>
+                            <li><span class="fontS18">请输入新密码:</span><input type="text" name="password" class="inputBase password"/></li>
+                            <li><button class="btn-default btn-submit" type="button" style="width:90px;height:30px;border-radius:10px;border:1px solid #ccc;margin-top:10px;">确定</button><span class="red fontS18 span-err"></span></li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+
+            <% include footer.ejs%> 
+        </div>
+        <!-- 如果要使用Bootstrap的js插件，必须先调入jQuery -->
+        <script src="/javascripts/jquery-1.9.1.js"></script>
+        <script type="text/javascript">
+            $(function(){
+                $('.btn-submit').click(function(){
+                    var password = $('.password').val();
+                    if(password == '') {
+                        $('.span-err').html('密码不能为空');
+                    }else {
+                        $('.forget-form').submit();
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

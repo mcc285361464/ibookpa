@@ -68,6 +68,12 @@ ul,ol {
 .marginL10 {
 	margin: 10px;
 }
+.marginL20 {
+	margin-left: 20px;
+}
+.marginT10 {
+	margin-top: 10px;
+}
 .pointer {
 	cursor: pointer;
 }
@@ -79,6 +85,18 @@ ul,ol {
 }
 .w1000 {
 	width: 1000px;
+}
+.green {
+	color: green;
+}
+.main-content .inputBase {
+	margin-left: 10px;
+	border-radius: 10px;
+	width: 270px;
+	font-size: 20px;
+	padding-left: 5px;
+	border: 1px solid #ccc;
+	outline: none
 }
 .body-content .header{
 	position:relative;
@@ -314,6 +332,19 @@ ul,ol {
 	color: #ccc;
 }
 
+.paginator {
+	font-size: 20px;
+	text-align: center;
+}
+
+.paginator a {
+	margin-left: 10px;
+	text-decoration: none;
+}
+
+.paginator a:hover {
+	color: red;
+}
 
 
 

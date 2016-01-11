@@ -18,6 +18,19 @@ $(function(){
 		window.location="/publish";
 	});
 
+	//分页
+	var page = $('.input-page').val();
+	$('.activity-content').append(page);
+
+	//点击页数，高亮提示
+	var currentPage = $('.currentPage').val();
+	var pa = $('.paginator a');
+	pa.each(function(i){
+		if($(this).html().trim() == currentPage) {
+			$(this).addClass('red');
+		}
+	});
+
 	//评论
 	$('.ul-user-option').delegate('.user-talk-about','click',function(){
 		var aid = $(this).attr('data-id').trim();
@@ -31,7 +44,9 @@ $(function(){
 			apply = $(this).find('.apply-state'),
 			user_sex = $('#user_sex').val(),
 			act_sex = apply.attr('data-sex');
-
+		if(user == '' || user == null) {
+			window.location = '/users/login';
+		}
 		if(apply.html().trim() == '报名') {
 			url = '/apply-act';
 		}else {

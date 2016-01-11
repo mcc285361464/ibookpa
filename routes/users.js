@@ -6,6 +6,8 @@ var session = require('express-session');
 var async = require('async');
 var multiparty = require('multiparty');
 var fs = require('fs');
+var nodemailer = require('nodemailer');
+
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -412,6 +414,77 @@ router.post('/uploadHeadPic', function(req, res, next) {
 
 		}
 	});
+});
+
+//忘记密码
+router.get('/forget', function(req, res, next) {
+	res.render('forget');
+});
+
+router.post('/forgetPassword', function(req, res, next) {
+	var username = req.body.username,
+		email = req.body.email,
+		regU = /^1[34578]\d{9}/,
+		regM = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/;
+
+	if(!regU.test(username) || !regM.test(email)) {
+		res.render('forget',{'err':'用户名或邮箱格式错误'});
+	}
+
+	conn.query('select username,mail from t_users where username=?',[username],function(err,results){
+		if(err) {
+			console.log(err);
+		}else {
+			if(results.length == 0) {
+				res.render('forget',{err:'该用户名没有注册'});
+			}else {
+				if(results[0].mail != email) {
+					res.render('forget',{err:"该用户名对应的邮箱错误"})
+				}else {
+					// create reusable transporter object using SMTP transport 
+					var transporter = nodemailer.createTransport({
+					    service: '163',
+					    auth: {
+					        user: 'shupawang@163.com',
+					        pass: 'shupawang123'
+					    }
+					});
+					var href = 'http://localhost:3000/users/tranChangePass/'+username;
+					var mailOptions = {
+					    from: '书趴网 <shupawang@163.com>', // sender address 
+					    to: email, // list of receivers 
+					    subject: '找回密码', // Subject line 
+					    text: 'Hello world ', // plaintext body 
+					    html: '<a href="'+href+'"><b>点击该链接修改密码</b></a>' // html body 
+					};
+					transporter.sendMail(mailOptions, function(error, info){
+					    if(error){
+					        return console.log(error);
+					    }
+					});
+					res.render('login');
+				}
+			}
+		}
+	});
+});
+
+router.get('/tranChangePass/:uName', function(req, res, next) {
+	var username = req.params.uName;
+	res.render('forget1',{username:username});
+});
+
+router.post('/changePasswordFinally', function(req, res, next) {
+	var username = req.body.username,
+		password = req.body.password;
+	conn.query('update t_users set password = ? where username = ?',[password,username],function(err,results){
+		if(err) {
+			console.log(err);
+		}else {
+			res.render('login',{changeSuccess:'修改密码成功'});
+		}
+	});
+	
 });
 
 //通过时间戳--->时间

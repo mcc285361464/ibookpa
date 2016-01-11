@@ -1,0 +1,11 @@
+.body-content .main-content {
+	height: 360px;
+	width: 960px;
+	padding: 20px 50px;
+	margin: 100px auto 50px auto;
+	background: #FCE5F2;
+}
+.body-content .main-content-wrapper {
+	width: 400px;
+	margin: 0 auto;
+}

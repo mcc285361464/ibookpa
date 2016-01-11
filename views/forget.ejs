@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ibookpa</title>   
+        <!--你自己的样式文件 -->
+        <link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.min.css">
+        <link href="/stylesheets/style.css" rel="stylesheet" />        
+        <link href="/stylesheets/forget.css" rel="stylesheet" />        
+    </head>
+    <body>
+        <div class="body-content">
+            <div class="main-content">
+                <h1>找回密码</h1><a href="/users/login" class="fontS18">想起来了</a>----<a href="/" class="fontS18">返回首页</a>----<a href="/users/register" class="fontS18">去注册</a>
+                <div class="main-content-wrapper">
+                    <h2>请输入你注册时的</h2>
+                    <form action="forgetPassword" method="post" class="forget-form">
+                        <ul>
+                            <li><span class="fontS18">用户名:</span><input type="text" name="username" class="inputBase username"/></li>
+                            <li><span class="fontS18">邮箱:</span><input type="text" name="email" class="inputBase marginL20 marginT10 email" style="margin-left:27px;"/></li>
+                            <li><button class="btn-default btn-submit" type="button" style="width:90px;height:30px;border-radius:10px;border:1px solid #ccc;margin-top:10px;">确定</button><span class="red fontS18 span-err"><%if(typeof(err)!='undefined'){%><%=err%><%}%></span></li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+
+            <% include footer.ejs%> 
+        </div>
+        <!-- 如果要使用Bootstrap的js插件，必须先调入jQuery -->
+        <script src="/javascripts/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="/javascripts/forget.js"></script>
+    </body>
+</html>

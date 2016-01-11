@@ -16,6 +16,7 @@
 				<img src="/images/bg.jpg" class="pics">
 			</div>
 			<div class="right">
+				<div class="change-success"><%if(typeof(changeSuccess) != 'undefined'){%><%=changeSuccess%><%}%></div>
 				<span class="welcome">欢迎登陆</span><br>
 				<div class="div-login">
 					<form action="doLogin" method="post" class="form-login">
@@ -37,7 +38,7 @@
 						<div class="div-btns">
 							<button type="button" class="btn btn-default width75 btn-login">登陆</button>
 							<button type="button" class="btn btn-default col-md-offset-1 width75 btn-register">注册</button>
-							<a href="" class="forget-password marginL15 fontS14">忘记密码了？</a>
+							<a href="/users/forget" class="forget-password marginL15 fontS14">忘记密码了？</a>
 						</div>
 					</form>
 				</div>

@@ -3,32 +3,55 @@ var router = express.Router();
 var session = require('express-session');
 var conn = require('../utils/mysql');
 var async = require('async');
+var pagination = require('pagination');
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+	
 	var nowDateT = Math.round(new Date().getTime()/1000),
 		friends = new Array(),
 		sess = req.session,
 		user = sess.user,
-		userId = null;
+		userId = null,
+		page = req.query.page, //当前页
+		rowsPerPage = 8, //每页数量
+		totalResult = 0; //总数
+
+	if(page == null || page == '') {
+		page = 1;
+	}
 	if(user!= undefined) {
 		userId = user.id;
 	}
 	async.waterfall([  
 	    function(callback){
-		    conn.query('select u.headPictureUrl,u.id uid,u.nickname,ua.id,ua.theme,ua.activityWay,ua.address,ua.applyCount,ua.createDate,ua.finishDate,ua.objectSex,ua.remark from t_users u,t_useractivity ua where activityDateSign>? and ua.launcherId=u.id;',[nowDateT],function(err,results){
+		    conn.query('select u.headPictureUrl,u.id uid,u.nickname,ua.id,ua.theme,ua.activityWay,ua.address,ua.applyCount,ua.createDate,ua.finishDate,ua.objectSex,ua.remark from t_users u,t_useractivity ua where activityDateSign>? and ua.launcherId=u.id order by ua.id desc limit ?,?;',[nowDateT,rowsPerPage*(page-1),rowsPerPage],function(err,results){
 				callback(err, results);  
 			});
 	    },function(data,callback){
-	    	conn.query('select bua.id,bua.receiverId,bua.userActivityId,bua.userId from t_betweenuseractivity bua,t_useractivity ua where ua.id=bua.userActivityId and ua.activityDateSign>? and bua.receiverId=?;',[nowDateT,userId],function(err,results){
+	    	var query = 'select bua.id,bua.receiverId,bua.userActivityId,bua.userId from t_betweenuseractivity bua,t_useractivity ua where ua.id=bua.userActivityId and ua.activityDateSign>'+nowDateT+' and bua.receiverId='+userId+' and bua.userActivityId in(';
+	    	for(var i=0;i<data.length;i++) {
+	    		if(i<data.length-1) {
+	    			query += data[i].id + ',';
+	    		}else {
+	    			query += data[i].id + ');';
+	    		}
+	    	}
+	    	conn.query(query,function(err,results){
 				callback(err, data, results);
 			});
+	    },function(data,data2,callback) {
+	    	conn.query('select id from t_useractivity where activityDateSign>?;',[nowDateT],function(err,results){
+	    		callback(err,data,data2,results)
+	    	});
 	    }
-    ], function (err,activitys,apply) {  
+    ], function (err,activitys,apply,actCount) {  
     	if(err) {
     		console.log(err);
     	}else {
-			res.render('index',{acts:activitys, apply:apply});
+		    var paginator = pagination.create('search', {prelink:'/', current: page, rowsPerPage: rowsPerPage, totalResult:actCount.length});
+			res.render('index',{acts:activitys, apply:apply, page:paginator.render(), currentPage:page});
     	}
     });  
 
@@ -260,6 +283,7 @@ router.post('/cancel-act',function(req, res, next) {
 		res.json({'state':200,'msg':'del'});
 	});
 });
+
 
 //服务条款
 router.get('/service',function(req, res, next) {
